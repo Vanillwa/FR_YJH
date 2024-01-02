@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            width: 500px;
+            text-align: center;
+        }
+    </style>
+   
+</head>
+<body>
+    <table border="1" style="border-collapse: collapse;">
+        <tr>
+            <td class="c3" colspan="3">1-1</td>
+            <td class="c3" colspan="3">1-2</td>
+        </tr>
+        <tr>
+            <td class="r2" rowspan="2">2-1</td>
+            <td class="c2" colspan="2">2-2</td>
+            <td class="r2" rowspan="2">2-3</td>
+            <td class="c2" colspan="2">2-4</td>
+        </tr>
+        <tr>
+            <td>3-1</td>
+            <td>3-2</td>
+            <td>3-3</td>
+            <td>3-4</td>
+        </tr>
+        <tr>
+            <td class="r2" rowspan="2">4-1</td>
+            <td>4-2</td>
+            <td>4-3</td>
+            <td class="r2" rowspan="2">4-4</td>
+            <td>4-5</td>
+            <td>4-6</td>
+        </tr>
+        <tr>
+            <td>5-1</td>
+            <td>5-2</td>
+            <td>5-3</td>
+            <td>5-4</td>
+        </tr>
+        <tr>
+            <td>6-1</td>
+            <td class="c2" colspan="2">6-2</td>
+            <td>6-3</td>
+            <td class="c2" colspan="2">6-4</td>
+        </tr>
+    </table>
+
+    <table border="1">
+        tr.class
+    </table>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(".c3").css("backgroundColor", "lightgreen");
+        $(".c2").css("backgroundColor", "skyblue");
+        $(".r2").css("backgroundColor", "yellow");
+    </script>
+</body>
+</html>
