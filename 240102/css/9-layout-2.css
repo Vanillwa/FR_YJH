@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+ul, ol, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.inner{
+    width: 1200px;
+    margin:0 auto;
+}
+.content{
+    padding:140px 0;
+}
+.title{
+    color:indigo;
+    font-size: 36px;
+}
+.mustache{
+    margin-top: 30px;
+}
+
+
+
+.header{
+    background-color: gray;
+    display:flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:30px;
+}
+.header>img{
+    display: block;
+}
+.header .right{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+.header .book-now{
+    font-size: 15px;
+    color:white;
+    background-color: hotpink;
+    padding:10px 30px;
+    border-radius: 20px;
+}
+.header .nav{
+    color:white;
+}
+
+
+
+
+
+
+
+
+.visual{
+    background-color: gray;
+    text-align: center;
+    padding:0 0 200px ;
+}
+.visual .box{
+    width: 900px;
+    margin:0 auto;
+    padding:0 15px;
+}
+
+
+.visual .t1{
+    font-size: 24px;
+    color:white;
+    font-family: helvetica;
+    margin-top: 130px;
+}
+.visual .t2{
+    font-size: 72px;
+    color:white;
+    font-family: helvetica;
+    margin-top: 25px;
+}
+.visual .t3{
+    font-size: 18px;
+    color:white;
+    font-family: helvetica;
+    margin-top: 38px;
+}
+
+
+
+
+
+.con1 .box{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.con1 .text{
+    width: 780px;
+    text-align: center;
+    color:gray;
+    margin-top: 30px;
+}
+
+.con1 .container{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap:30px;
+}
+
+.con1 .cell{
+    width: 570px;
+    display:flex;
+    justify-content: space-between;
+    background-color: whitesmoke;
+    padding:35px 60px;
+}
+
+.con1 .cell-text{
+    width: 280px;
+}
+.con1 .cell-img{
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}

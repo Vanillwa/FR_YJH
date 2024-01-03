@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 헤더, 섹션, 푸터 */
+
+.content {
+  width: 100%;
+  padding: 120px 0;
+}
+.inner {
+  width: 1170px;
+  margin: 0 auto;
+}
+.content .title {
+  font: bold 24px "inherit";
+  margin: 0 0 40px;
+  text-align: center;
+  color: black;
+}
+.content .wrap {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+.content .wrap .box {
+  width: 25%;
+  height: 300px;
+  border: 1px solid gray;
+  background-color: whitesmoke;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  background-color: whitesmoke;
+}
+.header .inner {
+  display: flex;
+}
+.header .logo {
+  width: 100px;
+}
+.header .menuWrap {
+  width: calc(100% - 100px);
+  background-color: yellow;
+}
+
+.header .menuWrap .util {
+    display:flex;
+    justify-content: flex-end;
+}
+.header .menuWrap .util .ls{
+    font-size: 14px;
+    color:#777;
+}
+
+
+.header .menuWrap .gnbWrap {
+
+}
+#gnb{
+    display:flex;
+    justify-content: flex-end;
+}
+#gnb > li{
+    border:1px solid blue;
+}
+#gnb > li > a{
+    font-size: 18px;
+    color:#444;
+}
+
+
+
+
+
+
+
+.visual {
+  width: 100%;
+  height: 500px;
+  background-color: pink;
+}
+
+.footer {
+  width: 100%;
+  padding: 50px 0;
+  background-color: whitesmoke;
+}
+.footer .inner {
+  display: flex;
+}
+.footer div {
+  border: 1px solid lightgray;
+}
+.footer .fLogo {
+  width: 10%;
+}
+.footer .fMenu {
+  width: 60%;
+}
+.footer .fSns {
+  width: 30%;
+}

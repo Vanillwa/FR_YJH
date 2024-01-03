@@ -1,0 +1,325 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.inner{
+    width: 1200px;
+    margin:0 auto;
+}
+.content{
+    padding:110px 0;
+}
+.content .title{
+    text-align: center;
+    font-size:40px;
+    font: bold 24px 'inherit';
+}
+
+
+@media screen and (max-width : 1200px){
+    .inner{
+        width:100%;
+    }
+    .content{padding:100px 0;}
+}
+@media screen and (max-width : 768px){
+    
+}
+@media screen and (max-width : 480px){
+    
+}
+
+
+/* header */
+.header{
+
+}
+.header .inner{
+    margin:0 auto;
+    padding:35px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header .gnbWrap{
+    background-color: whitesmoke;
+    padding:10px 0;
+}
+.gnbWrapFixed {
+    position: fixed;
+    top: 0px;
+    width:100%;
+  }
+#gnb{
+    display:flex;
+    justify-content: center;
+}
+#gnb>li{
+    padding:0 20px;
+    text-align: center;
+}
+#gnb>li>a{
+    color:black;
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+/* visual */
+
+.visual{
+    text-align: center;
+    height: 787px;
+    background-color: lightgray;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.visual button{
+    padding: 15px;
+    border-radius: 100px;
+    width: 200px;
+}
+
+
+
+/* con1 */
+
+.con1 .wrap{
+    margin-top: 30px;
+}
+
+#menu-tabs{
+    display:flex;
+    justify-content: center;
+    gap:30px;
+}
+#menu-tabs>li>a{
+    font-size: 17px;
+    color:gray;
+}
+
+.con1 .product-container{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding:50px 0 0;
+}
+
+.con1 .product{
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    transition:all .3s;
+}
+
+.con1 .product:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.con1 .product>img{
+    width: 200px;
+}
+
+.con1 .product-describe{
+    text-align: center;
+    width: 270px;
+    font-size: 17px;
+    color:hotpink;
+    font-weight: 700;
+    margin-top: 15px;
+}
+@media screen and (max-width : 1200px){
+    .con1 .product{
+        width: 33.5%;
+    }
+}
+@media screen and (max-width : 768px){
+    .con1 .product{
+        width: 48.5%;
+    }
+}
+@media screen and (max-width : 480px){
+    .con1 .product{
+        width: 100%;
+    }
+}
+
+
+
+
+
+/* con2 */
+.con2{
+    background-color: whitesmoke;
+    height: 890px;
+}
+
+.con2 .product-container{
+    margin-top: 50px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.con2 .product{
+    padding:0 15px;
+    text-align: center;
+}
+
+.con2 .product>img{
+    width: 270px;
+}
+
+.con2 button{
+    margin:120px auto 0;
+    display:block;
+    padding:20px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+@media screen and (max-width : 1200px){
+    .con2 .product{
+        width: 33.3%;
+    }
+}
+@media screen and (max-width : 768px){
+    .con2 .product{
+        width: 48.5%;
+    }
+}
+@media screen and (max-width : 480px){
+    .con2 .product{
+        width: 100%;
+    }
+}
+
+
+
+
+/* con3 */
+
+.con3 .container{
+    margin-top: 70px;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap:30px;
+}
+
+.con3 button{
+    margin:120px auto 0;
+    display:block;
+    padding:20px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+@media screen and (max-width : 1200px){
+    .con3 .blog-post{
+        width: 48.5%;
+    }
+}
+@media screen and (max-width : 768px){
+    .con3 .blog-post{
+        
+    }
+}
+@media screen and (max-width : 480px){
+    .con3 .blog-post{
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer */
+
+.footer{
+    width: 100%;
+    background-color: black;
+    text-align: center;
+}
+
+.footer .inner{
+    display: flex;
+    justify-content: space-between;
+    padding:50px 0;
+}
+
+.footer .footer-logo{
+    display: flex;
+    flex-flow: column;
+    gap:10px;
+    text-align: left;
+    color:white;
+}
+
+.footer .footer-info{
+    display:flex;
+    flex-flow: column;
+    justify-content: flex-end;
+}
+
+#footer-menu{
+    display: flex;
+}
+
+#footer-menu>li{
+    padding:10px;
+}
+
+#footer-menu>li>a{
+    color:white;
+}
+
+#footer-sns{
+    display:flex;
+    flex-flow: row;
+    justify-content: flex-end;
+}
+
+#footer-sns>li{
+    padding:0 10px;
+}
+
+
+@media screen and (max-width : 1200px){
+
+}
+@media screen and (max-width : 768px){
+    
+}
+@media screen and (max-width : 480px){
+    
+}
