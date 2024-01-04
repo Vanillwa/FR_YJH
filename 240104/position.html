@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            position: relative;
+            top:100px;
+            left: 500px;
+
+            width:500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        .box{
+            position: absolute;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+
+            transition:all 1s;
+        }
+
+        .box:hover{
+            right:510px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="box"></div>
+    </div>
+</body>
+</html>

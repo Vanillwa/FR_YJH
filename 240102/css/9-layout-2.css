@@ -16,13 +16,36 @@ a {
 .content{
     padding:140px 0;
 }
-.title{
+.content .title{
     color:indigo;
-    font-size: 36px;
+    font-size: 2.25rem;
 }
 .mustache{
     margin-top: 30px;
 }
+
+@media screen and (max-width: 1200px){
+    
+    .content{
+        width:100%;
+        padding:0 40px;
+    }
+    .inner{
+        width:100%;
+    }
+
+    .box{
+        width: 100%;
+    }
+}
+@media screen and(max-width: 768px){
+    html{
+        font-size: 15px;
+    }
+}
+
+
+
 
 
 
@@ -99,16 +122,22 @@ a {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    width: 100%;
 }
 
 .con1 .text{
-    width: 780px;
+    width: 50%;
     text-align: center;
     color:gray;
     margin-top: 30px;
 }
 
+.con1 .text>p{
+    width: 100%;
+}
+
 .con1 .container{
+    width: 100%;
     margin-top: 50px;
     display: flex;
     justify-content: center;
@@ -117,18 +146,26 @@ a {
 }
 
 .con1 .cell{
-    width: 570px;
+    width: 44%;
     display:flex;
     justify-content: space-between;
     background-color: whitesmoke;
-    padding:35px 60px;
+    padding:30px;
 }
 
 .con1 .cell-text{
-    width: 280px;
+    width: 80%;
+    color:gray;
+    font-size: 0.9rem;
 }
 .con1 .cell-img{
-    width: 100px;
+    width: 20%;
     display: flex;
     justify-content: center;
+}
+
+@media screen and (max-width: 1200px){
+    .con1 .cell{
+        width:50%;
+    }
 }

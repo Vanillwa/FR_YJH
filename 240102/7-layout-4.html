@@ -5,28 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>uu</title>
     <link rel="stylesheet" href="css/layout-4.css"></link>
+    
 </head>
 <body>
     <header class="header">
         <div class="inner">
             <h1 class="logo"><a href="#">LOGO</a></h1>
-            <div class="menuWrap">
-                <div class="util">
-                    <span class="ls">nation</span>
-                    <span class="ls">역사체험관</span>
-                    <span class="ls">글자크기</span>
-                    <span class="ls">언어</span>
-                </div>
-                <nav class="gnbWrap">
-                    <ul id="gnb">
-                        <li><a href="#">menu1</a></li>
-                        <li><a href="#">menu2</a></li>
-                        <li><a href="#">menu3</a></li>
-                        <li><a href="#">menu4</a></li>
-                        <li><a href="#">menu5</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="gnbWrap">
+                <ul id="gnb">
+                    <li><a href="#">menu1</a></li>
+                    <li><a href="#">menu2</a></li>
+                    <li><a href="#">menu3</a></li>
+                    <li><a href="#">menu4</a></li>
+                    <li><a href="#">menu5</a></li>
+                </ul>
+            </nav>
+            <img class="burgerBtn" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png" style="width: 50px;">
         </div>
     </header>
 
@@ -87,4 +81,22 @@
         </div>
     </footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    $('.burgerBtn').on('click',function(){
+        if ($('.gnbWrap').css('display') == 'block') {
+            $('.gnbWrap').css('display', 'none');
+        } else {
+            $('.gnbWrap').css('display', 'block');
+        }
+    });
+
+    $(window).resize(function(){
+        if($(window).width()>1183){
+            $('.gnbWrap').css('display', 'block');
+        }else{
+            $('.gnbWrap').css('display', 'none');
+        }
+    })
+</script>
 </html>

@@ -44,45 +44,65 @@ a {
 
 .header {
   width: 100%;
-  height: 100px;
   background-color: whitesmoke;
 }
 .header .inner {
+  height: 100px;
+  padding:0 40px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .header .logo {
   width: 100px;
 }
-.header .menuWrap {
-  width: calc(100% - 100px);
-  background-color: yellow;
-}
-
-.header .menuWrap .util {
-    display:flex;
-    justify-content: flex-end;
-}
-.header .menuWrap .util .ls{
-    font-size: 14px;
-    color:#777;
-}
 
 
-.header .menuWrap .gnbWrap {
-
-}
 #gnb{
     display:flex;
     justify-content: flex-end;
 }
 #gnb > li{
-    border:1px solid blue;
+    padding:0px 10px;
 }
 #gnb > li > a{
     font-size: 18px;
     color:#444;
 }
+.burgerBtn{
+  display:none;
+}
 
+
+@media screen and (max-width:1200px){
+  .gnbWrap{
+    display:none;
+    position:fixed;
+    right:0;
+    top:100px;
+    width: 300px;
+    height: 100%;
+    background-color: yellow;
+  }
+
+  .burgerBtn{
+    display:block;
+    cursor: pointer;
+  }
+
+  .header .inner{
+    width: 100%;
+    padding:0 40px;
+  }
+  #gnb{
+    flex-flow: column;
+  }
+
+  #gnb>li>a{
+    line-height: 70px;
+    padding:0 20px;
+  }
+}
 
 
 
