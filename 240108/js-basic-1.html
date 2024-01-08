@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .btn-1, .btn-2{
+            transition: font-size .5s;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" class="btn-1 on">btn1</button><br><br>
+    <div>버튼 크기 : <input type="text" id="fs"></div>
+    <button type="button" class="btn-2">btn2</button>
+    
+    <script>
+        let btn1 = document.getElementsByClassName('btn-1')[0];
+        let btn2 = document.getElementsByClassName('btn-2')[0];
+
+        btn1.addEventListener('click', function(){
+            if(btn1.style.fontSize == '200px'){
+                btn1.style.fontSize = '16px';
+            }else{
+                btn1.style.fontSize = '200px';
+            }
+        });
+
+        btn2.addEventListener('click', function(){
+            let fs = document.getElementById("fs").value;
+
+            btn2.style.fontSize = fs+'px';
+        });
+
+        console.log(btn1.classList);
+        btn1.classList.remove('on');
+        console.log(btn1.classList);
+    </script>
+</body>
+</html>
