@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let member = [
+            {
+                name : '앤드류',
+                birth : '19940108',
+                major : '컴퓨터공학',
+                gender : '남자',
+                subject : {kor : 90, math : 92, eng : 75, soc : 95},
+                hobby : ['자원봉사', '달리기']
+            },
+            {
+                name : '조이',
+                birth : '19960422',
+                major : '국어국문',
+                gender : '여자',
+                subject : {kor : 95, math : 82, eng : 92, soc : 87},
+                hobby : ['애견산책', '다육이']
+            }
+        ];
+
+        for(let i of member){
+            console.log(i);
+        }
+    </script>
+</body>
+</html>

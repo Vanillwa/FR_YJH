@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{text-align: center;}
+    </style>
+</head>
+<body>
+    <button type="button" id="btn1">버튼</button>
+    <script>
+        let i = 0;
+        document.getElementById('btn1').addEventListener('click', function(){
+            console.log(this.innerText);
+            console.log(i++);
+        });
+
+        function f1(p1, p2){
+            //실행할 동작
+            console.log(p1+"+"+p2 + "=" + (p1+p2));
+        }
+
+        let student = {
+            score : {국어 : 90, 수학 : 80, 과학 : 70, 사회 : 77},
+            printScore : function(){
+                for(let i in this.score){
+                    console.log(i, this.score[i]);
+                }
+            }
+        }
+
+        student.printScore();
+
+        for(let key in student){
+            console.log(key);
+        }
+
+        let fruit = {a : 'apple', b : 'banana'};
+
+        for(let i in fruit){
+            console.log(i, fruit[i])
+        }
+
+    </script>
+</body>
+</html>
