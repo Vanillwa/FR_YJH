@@ -4,31 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+        *{margin:0; padding:0; font-family: 'Pretendard-Regular';}
+        body{background-color: black;}
+        .member{width:100%; padding:120px 0;}
+        .inner{width: 1170px; margin:0 auto;}
+        .title{text-align: center; margin-bottom: 30px; color: white; font-size: 40px;}
+        .wrap{display: flex; justify-content: space-between; flex-flow: row nowrap; gap:50px;}
+        .box{width:100%; display: flex; flex-flow: column; align-items: center; gap:10px; 
+            background-color: lightgray; padding:20px; transition: all .3s; border-radius: 10px; cursor: pointer;}
+        .box:hover{transform: scale(1.2,1.2); z-index: 2; background-color: white;}
+
+        .box.check .name::after{content: ' (임원)'}
+    </style>
 </head>
 <body>
-    <script>
-        let member = [
-            {
-                name : '앤드류',
-                birth : '19940108',
-                major : '컴퓨터공학',
-                gender : '남자',
-                subject : {kor : 90, math : 92, eng : 75, soc : 95},
-                hobby : ['자원봉사', '달리기']
-            },
-            {
-                name : '조이',
-                birth : '19960422',
-                major : '국어국문',
-                gender : '여자',
-                subject : {kor : 95, math : 82, eng : 92, soc : 87},
-                hobby : ['애견산책', '다육이']
-            }
-        ];
+    <section class="member">
+        <div class="inner">
+            <h2 class="title">회원정보</h2>
+            <div class="wrap">
+            </div>
+        </div>
+    </section>
 
-        for(let i of member){
-            console.log(i);
-        }
-    </script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
