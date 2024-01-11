@@ -27,6 +27,7 @@ for(let i of hotdogs){
                 <div class="item-img">
                     <img src="${i.image}">
                 </div>
+                <span class="view"><a href="#">VIEW</a></span>
             </div>`;
 }
 

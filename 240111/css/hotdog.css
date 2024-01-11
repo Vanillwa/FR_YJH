@@ -11,24 +11,25 @@
 .content .inner .title{text-align: center; margin-bottom: 20px; font-size: 35px;}
 .content .inner .wrap{width: 100%; display: flex; flex-flow: wrap; gap:30px}
 .content .inner .wrap .box{
-    width: calc((100% - 30px) / 2); height: auto; padding:30px;
+    width: calc((100% - 30px) / 2); height: 200px;
     display: flex; flex-flow: row; gap:10px;  justify-content: space-between; 
     background-color: whitesmoke; transition:all .1s;
+    position: relative;
 }
 .content .inner .wrap .box:hover{
-    transform: scale(1.01,1.01); box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); cursor: pointer; z-index: 2;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); cursor: pointer; z-index: 2;
 }
 
 .content .inner .wrap .box .text{
     width: 70%; display: flex; flex-flow: column;
-    justify-content: space-between; min-height: 130px;
+    justify-content: space-between; row-gap: 10px; padding:30px;
 }
-.content .inner .wrap .box .text>p{}
-.content .inner .wrap .box .text .item-name{font-size:20px; font-weight: 600; display: flex; gap:5px; align-items: center;}
+.content .inner .wrap .box .text .item-name{font-size:20px; font-weight: 600; display: flex; gap:5px; align-items: center; flex-flow: wrap;}
 .content .inner .wrap .box .text .item-name > span{padding:4px; font-size: 13px; border-radius: 5px; font-weight: 400;}
 .content .inner .wrap .box .text .item-name .new{background-color: yellow;}
 .content .inner .wrap .box .text .item-name .best{background-color: tomato; color:white;}
-.content .inner .wrap .box .text .item-hashtag{display: flex; flex-flow: row wrap; gap:10px;}
+.content .inner .wrap .box .text .item-content{height: auto;}
+.content .inner .wrap .box .text .item-hashtag{display: flex; flex-flow: row wrap; column-gap : 3px; row-gap: 3px;}
 .content .inner .wrap .box .text .item-hashtag>span{
     padding:5px; border-radius: 5px; font-size: 13px;
     background-color: lightgray; color:gray
@@ -36,6 +37,12 @@
 .content .inner .wrap .box .text .item-hashtag>span::before{content: '#'}
 .content .inner .wrap .box .item-img{width: 30%; overflow:hidden;}
 .content .inner .wrap .box .item-img>img{width:100%; height:100%; object-fit:cover;}
+
+
+.content .inner .wrap .box .view{position: absolute; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); color:white; display: flex; justify-content: center; align-items: center; opacity: 0; transition: all .2s;}
+.content .inner .wrap .box .view>a{display:block; width: 100px; line-height: 40px; color:white; text-decoration: none; border:1px solid white; text-align: center; border-radius: 5px; transition:all .2s; position: relative; top:30px;}
+.content .inner .wrap .box:hover .view{opacity: 1;}
+.content .inner .wrap .box:hover .view>a{opacity: 1; top:0;}
 
 
 @media screen and (max-width:1200px){
@@ -50,11 +57,12 @@
 
 @media screen and (max-width:640px){
     .content .inner .wrap .box{
-        flex-flow:column;
+        flex-flow:column; gap:20px; height: auto;
     }
     .content .inner .wrap .box .text{
         width: 100%; display: flex; flex-flow: column;
         justify-content: space-between;
+        order:1;
     }
     .content .inner .wrap .box .item-img{width: 100%; height: 40vw; overflow:hidden;}
 }
