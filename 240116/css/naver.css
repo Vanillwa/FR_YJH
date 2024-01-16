@@ -1,0 +1,28 @@
+*{margin:0; padding:0; box-sizing: border-box;}
+ol,ul,li{list-style: none;}
+a{text-decoration: none;}
+
+.login{padding:130px 0;}
+.login .title{text-align: center; color:#2DB400; font-weight: 600;}
+.login .wrap{width: 460px; margin:0 auto; border:1px solid black; border-radius: 5px;}
+.login .wrap .menu-wrap{padding:0; display: flex;}
+.login .wrap .menu-wrap .menu-item{width: 33.33333%; border:1px solid gray; text-align: center; padding:15px 0;}
+.login .wrap .menu-wrap .menu-item > a{color:black;}
+
+.login .wrap .login-panel{padding:20px 28px;}
+.login .wrap .login-panel .id-pwd-wrap .id-wrap{display: flex; border:1px solid lightgray; border-radius: 5px 5px 0 0; padding:14px 17px 13px;}
+.login .wrap .login-panel .id-pwd-wrap .pwd-wrap{display: flex; border:1px solid lightgray; border-radius: 0 0 5px 5px; padding:14px 17px 13px;}
+
+.login .wrap .login-panel .id-pwd-wrap > div.check{border:1px solid #2DB400; z-index: 999;}
+.login .wrap .login-panel .id-pwd-wrap .id-pw-input{border:none; width: 80%; outline: none; }
+
+
+.login .wrap .login-panel .login-keep-wrap{display: flex; justify-content: space-between; margin-top: 10px;}
+
+
+.login .wrap .login-panel .login-error-wrap{display:none;margin-top: 20px; font-size: 13px; color:red;}
+.login .wrap .login-panel .login-error-wrap.show{display:block;}
+
+
+.btn-wrap{margin-top: 30px;}
+.btn-wrap > input{width: 100%; border:1px solid darkgreen; background-color: #2DB400; border-radius: 5px; color:white; font-size: 20px; font-weight: 600; padding:10px 0;}
