@@ -1,0 +1,10 @@
+*{padding:0; margin: 0; box-sizing: border-box;}
+
+.content{padding:120px 0;}
+.content>div{transition: all .3s;}
+.content .row{height: 300px; background-color: pink; }
+.content .box{border: 1px solid black; }
+
+.id-wrap{position: relative;}
+.id-label{position: absolute; left: 0; top: 0;}
+.id-input:not(:placeholder-shown) + .id-label{display: none;}

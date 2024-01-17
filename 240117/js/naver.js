@@ -5,11 +5,11 @@ let login_error_wraps = document.querySelectorAll('.login-error-wrap');
 
 for(let i of id_pwd_inputs){
     i.addEventListener('focus', function(){
-        this.parentElement.classList.add('check');
+        this.parentElement.classList.add('labelUp');
     })
     i.addEventListener('blur', function(){
         if(i.value == '')
-            this.parentElement.classList.remove('check');
+            this.parentElement.classList.remove('labelUp');
     })
 }
 

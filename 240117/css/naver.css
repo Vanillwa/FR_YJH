@@ -13,11 +13,14 @@ a{text-decoration: none;}
 
 .login .wrap .login-panel{padding:20px 28px;}
 .login .wrap .login-panel .id-pwd-wrap{width:100%; display: flex; flex-flow: column; gap:10px;}
-.login .wrap .login-panel .id-pwd-wrap .idPwd{position: relative; width:100%; border:1px solid lightgray; padding:14px 17px 13px;}
+.login .wrap .login-panel .id-pwd-wrap .idPwd{position: relative; width:100%; border:1px solid lightgray; padding:14px 17px 13px; border-radius: 5px;}
 .login .wrap .login-panel .id-pwd-wrap .idPwd:focus-within{border:1px solid #2DB400;}
+.login .wrap .login-panel .id-pwd-wrap .idPwd:focus-within .input-label{
+    color:#2DB400;
+}
 
-.login .wrap .login-panel .id-pwd-wrap .idPwd .input-label{position: absolute; transition: all .2s; left: 15px; top:25%;}
-.login .wrap .login-panel .id-pwd-wrap .idPwd.check .input-label{
+.login .wrap .login-panel .id-pwd-wrap .idPwd .input-label{position: absolute; transition: all .2s; left: 15px; top:25%; color:gray;}
+.login .wrap .login-panel .id-pwd-wrap .idPwd.labelUp .input-label{
     top: -9px; background-color: white; font-size: 12px; padding:0 2px;
 }
 .login .wrap .login-panel .id-pwd-wrap .id-pw-input{border:none; width: 100%; outline: none;}
