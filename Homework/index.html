@@ -1,35 +1,120 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Krispy Kreme</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/krispykreme.css">
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div class="inner">
-                <div class="item left">
-                    <div>
-                        <div class="profile-img">
-                            <img src="img/profile.png" alt="">
+    <header>
+        <div class="container">
+            <div class="quick-bar">
+                <div class="shops">
+                    <i class="bi bi-geo-alt"></i>
+                    <a href="#">SHOPS</a>
+                </div>
+                <div class="buttons">
+                    <button class="join-rewards">JOIN REWARDS</button>
+                    <button class="sign-in">SIGN IN</button>
+                </div>
+                <div class="icons">
+                    <i class="bi bi-search"></i>
+                    <i class="bi bi-bag"></i>
+                </div>
+            </div>
+            <div class="header">
+                <div class="logo">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <ul class="gnb">
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Fundraising</a></li>
+                    <li><a href="#">Retail</a></li>
+                </ul>
+                <div class="order">
+                    <button type="button" class="delivery">
+                        <i class="bi bi-truck"></i>
+                        <div class="text">
+                            <p>ORDER</p>
+                            <p>DELIVERY</p>
+                        </div>
+                    </button>
+                    <button type="button" class="pick-up">
+                        <i class="bi bi-shop-window"></i>
+                        <div class="text">
+                            <p>ORDER</p>
+                            <p>PICKUP</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <section class="event">
+                <div class="event-banner">
+                    <img src="img/event-bg.webp" alt="">
+                    <div class="event-info">
+                        <img src="img/event-txt.webp" alt="">
+                        <div class="buttons">
+                            <button type="button">ORDER NOW</button>
+                            <button type="button">LEARN MORE</button>
                         </div>
                     </div>
                 </div>
-                <div class="item right">
-                    <h2>Yoon Jeong Hyeon</h2>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis voluptas error tempore voluptates illum vero molestias vitae fugit aliquid officia, cumque aspernatur laborum nobis et quod. Eveniet, hic consequatur? Eius?</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur aspernatur labore delectus vitae fugiat laborum nobis ducimus libero in id omnis unde, illo totam suscipit at sit adipisci ut voluptatum?</p>
+            </section>
+            <section class="top-treats">
+                <h2 class="title">TODAY’S TOP TREATS</h2>
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="https://www.krispykreme.com/getattachment/68538a94-5211-4e34-945f-c36753fe6779/imagename" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff® Cookie Butter Iced
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="https://www.krispykreme.com/getattachment/b3a570e6-c118-43d0-96d7-70153def6135/imagename" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff® Cookie Butter Cheesecake
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="https://www.krispykreme.com/getattachment/021c725e-1b96-425d-bb49-5c73c91a2203/imagename" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff® Chocolate Cookie Butter Crunch
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="https://www.krispykreme.com/getattachment/d109f46e-e0e7-4458-8672-ed9e4b1da4bd/imagename" alt="">
+                        </div>
+                        <div class="item-name">
+                            Original Glazed® Doughnut
+                        </div> 
+                    </div>
                 </div>
-            </div>
-        </header>
-        <main>
+            </section>
+            <section class="offers">
+                <div class="offer"></div>
+                <div class="offer"></div>
+                <div class="offer"></div>
+            </section>
+        </div>
+    </main>
+    <footer>
 
-        </main>
-        <footer>
-
-        </footer>
-    </div>
+    </footer>
 </body>
 </html>
