@@ -80,36 +80,61 @@ header{position: fixed; top: 0; width: 100%; border-bottom: 1px solid lightgray;
 main{width: 100%; max-width: 1440px; margin:150px auto 0; padding:0 30px;}
 
     main .container{width: 100%; max-width: 1300px; padding:30px 0 0; margin:0 auto;}
+    main .container > section{padding:25px 0 140px;}
 
     /* event */
-    main .container .event{width: 100%; padding: 25px 0 0;}
-    main .container .event .event-banner{width: 100%; height: 584px; position: relative; border-radius: 20px; overflow: hidden;}
-    main .container .event .event-banner > img:first-of-type{width: 100%; height: 100%; position: absolute; object-fit: cover;}
-    main .container .event .event-banner .event-info{position: absolute; top: 20%; left: 5vw; width: 440px; display: flex; flex-flow: column; gap:50px;}
-    main .container .event .event-banner .event-info >img{width: 100%;}
-    main .container .event .event-banner .buttons{display: flex; justify-content: center; gap:10px;}
-    main .container .event .event-banner .buttons > button{font-size: 16px; padding: 12px 24px; border-radius: 50px; border:none; letter-spacing: 1px; transition: all .3s; cursor: pointer;}
-    main .container .event .event-banner .buttons > button:first-of-type{background-color: #006938; color:white;}
-    main .container .event .event-banner .buttons > button:first-of-type:hover{background-color: #009e54;}
-    main .container .event .event-banner .buttons > button:last-of-type{background-color: white; color:#006938;}
-    main .container .event .event-banner .buttons > button:last-of-type:hover{
+    main .container .event{width: 100%;}
+    main .container .event .wrapper{width: 100%; height: 584px; position: relative; border-radius: 20px; overflow: hidden;}
+    main .container .event .wrapper > img:first-of-type{width: 100%; height: 100%; position: absolute; object-fit: cover;}
+    main .container .event .wrapper .event-info{position: absolute; top: 20%; left: 5vw; width: 440px; display: flex; flex-flow: column; gap:50px;}
+    main .container .event .wrapper .event-info >img{width: 100%;}
+    main .container .event .wrapper .buttons{display: flex; justify-content: center; gap:10px;}
+    main .container .event .wrapper .buttons > button{font-size: 16px; padding: 12px 24px; border-radius: 50px; border:none; letter-spacing: 1px; transition: all .3s; cursor: pointer;}
+    main .container .event .wrapper .buttons > button:first-of-type{background-color: #006938; color:white;}
+    main .container .event .wrapper .buttons > button:first-of-type:hover{background-color: #009e54;}
+    main .container .event .wrapper .buttons > button:last-of-type{background-color: white; color:#006938;}
+    main .container .event .wrapper .buttons > button:last-of-type:hover{
         background-color: #006938; color: white;
     }
 
     /* top-treats */
-    main .container .top-treats{width: 100%; padding: 25px 0 0;}
+    main .container .top-treats{width: 100%;}
     main .container .top-treats .title{text-align: center; font-size: 40px; margin-bottom: 35px;}
     main .container .top-treats .wrapper{display: flex; gap:12px;}
-    main .container .top-treats .wrapper .box{width: calc((100% - 12px * 3) / 4); padding:20px; background-color: whitesmoke; text-align: center; transition: all .2s; cursor: pointer;}
+    main .container .top-treats .wrapper .box{width: calc((100% - 12px * 3) / 4); padding:20px; background-color: whitesmoke; text-align: center; transition: all .2s; cursor: pointer; border-radius: 20px;}
     main .container .top-treats .wrapper .box:hover{background-color: rgb(240, 240, 240); box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); transform: scale(1.02); transform-origin: 50% 50%;}
     main .container .top-treats .wrapper .box .item-img{}
     main .container .top-treats .wrapper .box .item-img > img{width: 80%;}
     main .container .top-treats .wrapper .box .item-name{font-size: 24px; text-transform: uppercase; color: #006938;}
 
     /* offers */
-    main .container .offers{width: 100%; padding: 25px 0 0;}
+    main .container .offers{width: 100%;}
+    main .container .offers .offer{width: 100%; display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.14), 0 6px 6px rgba(0,0,0,0.19); margin-bottom: 50px;}
+    main .container .offers .offer:nth-of-type(2n+1) .offer-content{order: 2;}
+    main .container .offers .offer .offer-content{width: 50%; display: flex; flex-flow: column;justify-content: center; padding: 0 50px; background-color: whitesmoke;}
+    main .container .offers .offer .offer-img{width: 50%;}
+    main .container .offers .offer .offer-img > img{width:100%; height:100%; object-fit:cover;}
     
+    /* coffee */
+    main .container .coffee{width: 100%;}
+    main .container .coffee .title{text-align: center; font-size: 40px; margin-bottom: 35px;}
+    main .container .coffee .wrapper{display: flex; gap:12px;}
+    main .container .coffee .wrapper .box{width: calc((100% - 12px * 3) / 4); padding:20px; background-color: whitesmoke; text-align: center; transition: all .2s; cursor: pointer; border-radius: 20px;}
+    main .container .coffee .wrapper .box:hover{background-color: rgb(240, 240, 240); box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); transform: scale(1.02); transform-origin: 50% 50%;}
+    main .container .coffee .wrapper .box .item-img{}
+    main .container .coffee .wrapper .box .item-img > img{width: 80%;}
+    main .container .coffee .wrapper .box .item-name{font-size: 24px; text-transform: uppercase; color: #006938;}
 
+    /* application */
+    main .container .application{width: 100%; margin-top: 100px;}
+    main .container .application .wrapper{display: flex; background-color: #006938; border-radius: 20px; padding:0 110px; height: 433px;}
+    main .container .application .wrapper > div{width: 50%;}
+    main .container .application .wrapper .img{position: relative;}
+    main .container .application .wrapper .img > img{position: absolute; width: 420px; bottom: 0;}
+    main .container .application .wrapper .content{display: flex; flex-flow: column; justify-content: center; padding:20px; color:white; gap:10px;}
+    main .container .application .wrapper .content .title{font-size: 40px; text-transform: uppercase;}
+    main .container .application .wrapper .content .txt{font-weight:200;}
+    main .container .application .wrapper .content .downloads{margin-top: 20px; display: flex; gap:20px;}
 
 
 
