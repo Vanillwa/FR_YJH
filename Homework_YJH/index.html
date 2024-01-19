@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krispy Kreme?</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/krispykreme.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <!-- header start -->
+    <header>
+        <div class="container">
+            <div class="mobile-gnb-wrapper" id="mobile-gnb-wrapper">
+                <ul class="mobile-gnb" id="mobile-gnb">
+                    <li><i class="bi bi-x-lg" id="mobile-gnb-close"></i></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Fundraising</a></li>
+                    <li><a href="#">Retail</a></li>
+                    <li><hr></li>
+                    <li>
+                        <span class="shops">
+                            <i class="bi bi-geo-alt"></i>
+                            <a href="#">SHOPS</a>
+                        </span>
+                    </li>
+                    <li><button class="join-rewards">JOIN REWARDS</button></li>
+                    <li><button class="sign-in" onclick="location.href='login-form.html'">LOG IN</button></li>
+                </ul>
+            </div>
+            <div class="quick-bar">
+                <i class="bi bi-list" id="hamburger"></i>
+                <div class="logo">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <div class="quick-bar-right">
+                    <div class="shops">
+                        <i class="bi bi-geo-alt"></i>
+                        <a href="#">SHOPS</a>
+                    </div>
+                    <div class="buttons">
+                        <button class="join-rewards">JOIN REWARDS</button>
+                        <button class="sign-in" onclick="location.href='login-form.html'">LOG IN</button>
+                    </div>
+                    <div class="icons">
+                        <i class="bi bi-search"></i>
+                        <i class="bi bi-bag"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="header">
+                <div class="logo">
+                    <img src="img/logo.png" alt="">
+                </div>
+                <ul class="gnb" id="gnb">
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Catering</a></li>
+                    <li><a href="#">Rewards</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Fundraising</a></li>
+                    <li><a href="#">Retail</a></li>
+                </ul>
+                <div class="order">
+                    <button type="button" class="delivery">
+                        <i class="bi bi-truck"></i>
+                        <div class="text">
+                            <p>ORDER</p>
+                            <p>DELIVERY</p>
+                        </div>
+                    </button>
+                    <button type="button" class="pick-up">
+                        <i class="bi bi-shop-window"></i>
+                        <div class="text">
+                            <p>ORDER</p>
+                            <p>PICKUP</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header end -->
+
+    <!-- main start -->
+    <main>
+        <div class="container">
+
+            <!-- event section -->
+            <section class="event">
+                <div class="wrapper">
+                    <img src="img/event-bg.webp" alt="">
+                    <div class="event-info">
+                        <img src="img/event-txt.webp" alt="">
+                        <div class="buttons">
+                            <button type="button">ORDER NOW</button>
+                            <button type="button">LEARN MORE</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- top-treat section -->
+            <section class="top-treats">
+                <h2 class="title">TODAY’S TOP TREATS</h2>
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/doughnut-1.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff<sup>®</sup> Cookie Butter Iced
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/doughnut-2.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff<sup>®</sup> Cookie Butter Cheesecake
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/doughnut-3.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Biscoff<sup>®</sup> Chocolate Cookie Butter Crunch
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/doughnut-4.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Original Glazed<sup>®</sup> Doughnut
+                        </div> 
+                    </div>
+                </div>
+            </section>
+
+            <!-- offer section -->
+            <section class="offers">
+                <div class="offer img-left">
+                    <div class="offer-content">
+                        <h4 class="eyebrow">Limited Time!</h4>
+                        <h2 class="title">BISCOFF<sup>®</sup> IS B-A-C-K!</h2>
+                        <p class="copy">Bring the bold flavor of Biscoff<sup>®</sup> to your next event with Krispy Kreme catering!</p>
+                        <div class="button">
+                            <button type="button">START CATERING ORDER</button>
+                        </div>
+                    </div>
+                    <div class="offer-img">
+                        <img src="img/offer-1.png" alt="">
+                    </div>
+                </div>
+                <div class="offer img-right">
+                    <div class="offer-content">
+                        <h4 class="eyebrow">Hot, Iced or Frozen!</h4>
+                        <h2 class="title">TRY OUR CARAMEL VANILLA LATTE</h2>
+                        <p class="copy">Made iced, hot, and frozen with Ghirardelli Caramel Sauce and vanilla syrup that is topped with whipped cream and a drizzle of caramel sauce.</p>
+                        <div class="button">
+                            <button type="button">ORDER NOW</button>
+                        </div>
+                    </div>
+                    <div class="offer-img">
+                        <img src="img/offer-2.png" alt="">
+                    </div>
+                </div>
+                <div class="offer img-left">
+                    <div class="offer-content">
+                        <h4 class="eyebrow">Limited Time Offer!</h4>
+                        <h2 class="title">RAISE SOME DOUGH</h2>
+                        <p class="copy">with this sweet deal - 5 Free Fundraising products when you buy 50.</p>
+                        <div class="button">
+                            <button type="button">START FUNDRAISING</button>
+                        </div>
+                    </div>
+                    <div class="offer-img">
+                        <img src="img/offer-3.webp" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <!-- coffee section -->
+            <section class="coffee">
+                <h2 class="title">EXPLORE OUR ALL-NEW COFFEE</h2>
+                <div class="wrapper">
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/coffee-1.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Caramel Vanilla Latte
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/coffee-2.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Iced Caramel Vanilla Latte
+                        </div> 
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/coffee-3.png" alt="">
+                        </div>
+                        <div class="item-name">
+                            Frozen Caramel Vanilla Latte
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="item-img">
+                            <img src="img/coffee-4.webp" alt="">
+                        </div>
+                        <div class="item-name">
+                            Caramel Latte
+                        </div> 
+                    </div>
+                </div>
+            </section>
+
+            <!-- application section -->
+            <section class="application">
+                <div class="wrapper">
+                    <div class="img">
+                        <img src="img/application-img.webp" alt="">
+                    </div>
+                    <div class="content">
+                        <h2 class="title">
+                            Easy Ordering, Sweet Rewards
+                        </h2>
+                        <p class="txt">
+                            Save time when you order with our app.<br>
+                            Join mySweetRewards and earn free treats.<br>
+                            Get alerts when your local Hot Light is on.
+                        </p>
+                        <div class="downloads">
+                            <img src="img/iOS-App-Store-Graphic.png" alt="App Store icon">
+                            <img src="img/Google-Play-Graphic.png" alt="Google Play Store">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- location section -->
+            <section class="location">
+                <div class="wrapper">
+                    <div class="img">
+                        <img src="img/location-img.png" alt="">
+                    </div>
+                    <div class="content">
+                        <div class="titles">
+                            <h2 class="title">SWING BY</h2>
+                            <h3 class="subtitle">Your Nearest Krispy Kreme Shop</h3>
+                        </div>
+                        <div class="info">
+                            <p>Winston Salem - S Stratford Rd</p>
+                            <address> 259 S Stratford Road<br>Winston Salem, NC 27103</address>
+                        </div>
+                        <div class="open-detail">
+                            <p>Open until 10:00 PM</p>
+                        </div>
+                        <div class="buttons">
+                            <button type="button" class="order-now"><i class="bi bi-shop-window"></i>ORDER NOW</button>
+                            <button type="button" class="shops"><i class="bi bi-geo-alt"></i>SHOPS</button>
+                            <button type="button" class="show-hours" id="show-hours">SHOW HOURS ▼</button>
+                            <div class="hours-detail" id="hours-detail">
+                                <div class="hours-list" id="hours-list">
+                                    <div class="hours-item">
+                                        <div class="title">DINE-IN HOURS</div>
+                                        <ul>
+                                            <li>Sun-Fri 6:00AM-10:00PM</li>
+                                            <li>Sat 6:00AM-11:00PM</li>
+                                        </ul>
+                                    </div>
+                                    <div class="hours-item">
+                                        <div class="title">HOT LIGHT HOURS</div>
+                                        <ul>
+                                            <li>Sun-Sat 7:00AM-9:00AM and 5:00PM-7:00PM</li>
+                                        </ul>
+                                    </div>
+                                    <div class="hours-item">
+                                        <div class="title">DRIVE-THRU HOURS</div>
+                                        <ul>
+                                            <li>Sun-Thu 6:00AM-10:00PM</li>
+                                            <li>Fri-Sat 6:00AM-11:00PM</li>
+                                        </ul>
+                                    </div>
+                                    <div class="hours-item">
+                                        <div class="title">DELIVERY HOURS</div>
+                                        <ul>
+                                            <li>Sun-Thu 6:30AM-9:30PM</li>
+                                            <li>Fri-Sat 6:30AM-10:30PM</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- disclaimer section -->
+            <section class="disclaimer">
+                <div class="wrapper">
+                    <p class="txt">
+                        * Offer available 1/16/24 – 1/21/24 only at participating U.S. Krispy Kreme shops only and is subject to product availability. Biscoff Specialty Dozen qualifies. Available in shop, drive thru and online for pickup or delivery. Promo Code TREAT required to redeem online. Barcode required to redeem in shop. Limit 2 per customer in shop and drive thru; limit 1 per customer online. Not valid in Times Square. Not valid in Puerto Rico. Offer is not combinable with any other offer, discount or coupon.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <!-- main end -->
+
+    <!-- footer start -->
+    <footer>
+        <div class="container">
+            <div class="footer-nav">
+                <div class="nav-box">
+                    <div class="title">SERVICES</div>
+                    <div class="items-wrapper">
+                        <ul class="items">
+                            <li class="item">CATERING</li>
+                            <li class="item">FUNDRAISING</li>
+                            <li class="item">ONLINE ORDERING</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <div class="title">COMPANY</div>
+                    <div class="items-wrapper">
+                        <ul class="items">
+                            <li class="item">ABOUT US</li>
+                            <li class="item">ALL LOCATIONS</li>
+                            <li class="item">CAREERS</li>
+                            <li class="item">INVESTORS</li>
+                            <li class="item">RESPONSIBILITY REPORT</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <div class="title">SUPPORT</div>
+                    <div class="items-wrapper">
+                        <ul class="items">
+                            <li class="item">FAQS</li>
+                            <li class="item">NEED HELP?</li>
+                            <li class="item">SCAM ALERT</li>
+                            <li class="item">SITEMAP</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <div class="title">LEGAL & PRIVACY</div>
+                    <div class="items-wrapper">
+                        <ul class="items">
+                            <li class="item">ACCESSIBILITY</li>
+                            <li class="item">CA SUPPLY CHAINS ACT</li>
+                            <li class="item">PRIVACY POLICY</li>
+                            <li class="item">TERMS OF USE</li>
+                            <li class="item">COOKIE POLICY</li>
+                            <li class="item">YOUR PRIVACY CHOICES</li>
+                            <li class="item">COOKIES SETTINGS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sns">
+                <i class="bi bi-instagram"></i>
+                <i class="bi bi-twitter"></i>
+                <i class="bi bi-facebook"></i>
+            </div>
+        </div>
+        <div class="logo">
+            <p>Copyright 2024 Krispy Kreme Doughnut Corp.</p>
+            <img src="img/logo.png" alt="">
+        </div>
+    </footer>
+    <!-- footer end -->
+    <script src="js/krispykreme.js"></script>
+</body>
+</html>
