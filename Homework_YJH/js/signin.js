@@ -13,43 +13,68 @@ $('.input').on('blur', function(){
     }
 });
 
+// submit
 function send(f){
     let id = f.id.value;
     let pwd = f.pwd.value;
     var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,12}$/;
 
+    $('.error').removeClass('show');
+    
     if(id =='' && pwd == ''){
-        alert('아이디와 비밀번호를 입력해주세요.');
+        $('#both-empty').addClass('show');
         $('#id').focus();
         return;
     }
     if(id == ''){
-        alert('아이디를 입력해주세요.');
+        $('#id-empty').addClass('show');
         $('#id').focus();
         return;
     }
     if(pwd == ''){
-        alert('비밀번호를 입력해주세요.');
+        $('#pwd-empty').addClass('show');
         $('#pwd').focus();
         return;
     }
     if(id.length<4 || id.length>12){
-        alert('아이디는 4~12글자 입니다.')
+        $('#id-wrong-type').addClass('show');
         $('#id').focus();
         return;
     }
     if(!passwordPattern.test(pwd)){
-        alert('올바르지 않은 비밀번호 형식입니다.');
+        $('#pwd-wrong-type').addClass('show');
         $('#pwd').focus();
         return;
     }
 
     //로그인 검사
-    if(id== userInfo.id && pwd == userInfo.pwd){
+    if(id == userInfo.id && pwd == userInfo.pwd){
         alert('로그인 성공!');
         return;
+    }else if(id == userInfo.id && pwd != userInfo.pwd){
+        alert('비밀번호가 일치하지 않습니다!')
+        $('#pwd').focus();
+        return;
     }else{
-        alert('로그인 실패!');
+        alert('존재하지 않는 계정입니다!');
+        $('#id').focus();
         return;
     }
 }
+
+// 엔터키로 로그인 실행
+$('#login-form').keypress(function(e){
+    if(e.keyCode === 13)
+        $('#sign-in').click();
+})
+
+// 비밀번호 보이기 토글
+$('#pwd-toggle').on('click', function(){
+    $(this).toggleClass('bi-eye bi-eye-slash');
+    
+    if($('#pwd').prop('type') == "password"){
+        $('#pwd').prop('type', 'text');
+    }else{
+        $('#pwd').prop('type', 'password');
+    }
+})

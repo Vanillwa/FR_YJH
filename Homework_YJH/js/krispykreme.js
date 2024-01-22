@@ -23,5 +23,17 @@ $('#mobile-gnb-close').on('click', mobile_gnb_close);
 $(window).resize(function(){
     if($(window).width()+17 > 1024){
         mobile_gnb_close();
-    }  
+    }
 });
+
+
+$('.footer-nav-mobile .nav-box .footer-title').on('click', function(){
+    let wrapper = $(this).siblings('.items-wrapper');
+    let scrollHeight = wrapper.prop('scrollHeight') + 'px';
+    if(wrapper.css('max-height') == '0px')
+        wrapper.css('max-height', scrollHeight);
+    else
+        wrapper.css('max-height', '0px');
+
+    $(this).parent().toggleClass('show');
+})
