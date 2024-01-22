@@ -34,7 +34,7 @@ header{position: fixed; top: 0; width: 100%; border-bottom: 1px solid lightgray;
 
     header .container{width: 100%; max-width: 1320px; margin: 0 auto; padding:0 30px;}
     @media screen and (max-width:640px) {
-        header .container{width: 100%; padding:10px 0; min-width: 320px;}
+        header .container{width: 100%; padding:10px; min-width: 320px;}
     }
     
     /* mobile-gnb */
@@ -54,7 +54,7 @@ header{position: fixed; top: 0; width: 100%; border-bottom: 1px solid lightgray;
     header .container .quick-bar::after{content: ''; width: 100vw; height: 1px; background-color: lightgray; position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 0);}
         
         header .container .quick-bar #hamburger{font-size: 25px; line-height: 0; display: none; cursor: pointer;}
-        header .container .quick-bar .logo{display: none;}
+        header .container .quick-bar .logo{display: none; cursor: pointer;}
         header .container .quick-bar .quick-bar-right{display: flex; align-items: center; gap: 30px;}
 
         /* shops */
@@ -233,10 +233,12 @@ footer{padding: 100px 30px; display: flex; flex-flow: column; align-items: cente
 footer .container{width: 100%; max-width: 1320px; margin: 0 auto; display: flex; justify-content: space-between;}
 footer .logo{text-align: center;}
 footer .logo > p{font-family: sans-serif; font-size: 14px;}
+footer .logo > img{cursor: pointer;}
     /* footer-nav */
     footer .container .footer-nav{width: 65%; display: flex; justify-content: space-between;}
     footer .container .footer-nav .nav-box{display: flex; flex-flow: column; gap:20px;}
     footer .container .footer-nav .nav-box .title{letter-spacing: 1px;}
     footer .container .footer-nav .nav-box .items-wrapper .items{display: flex; flex-flow: column; gap:20px;}
     footer .container .footer-nav .nav-box .items-wrapper .items .item{font-size: 12px; color:#006938 ; cursor: pointer;}
-    footer .container .sns{width: 35%; text-align: center; font-size: 30px; letter-spacing: 10px; color: #006938; cursor: pointer;}
+    footer .container .sns{width: 35%; text-align: center; font-size: 30px; letter-spacing: 10px; color: #006938;}
+    footer .container .sns > i{cursor: pointer;}
