@@ -30,7 +30,7 @@ ul,ol,li{list-style: none;}
 a{text-decoration: none; color:black;}
 
 /* header */
-header{position: fixed; top: 0; left: 0; width: 100%; border-bottom: 1px solid lightgray; background-color: white; z-index: 1;}
+header{position: fixed; top: 0; left: 0; width: 100%; border-bottom: 1px solid lightgray; background-color: white; z-index: 999;}
 
     header .container{width: 100%; max-width: 1320px; min-width: 320px; margin: 0 auto; padding:0 30px;}
     @media screen and (max-width:640px) {
@@ -38,7 +38,7 @@ header{position: fixed; top: 0; left: 0; width: 100%; border-bottom: 1px solid l
     }
     
     /* mobile-gnb */
-    header .container .mobile-gnb-wrapper{position:fixed; top:0; left:0; background-color: white; padding: 30px 30px 0; z-index: 1; height: 100%; width: 100%; max-width: 300px; translate: -100%; transition: all .3s;}
+    header .container .mobile-gnb-wrapper{position:fixed; top:0; left:0; background-color: white; padding: 30px 30px 0; z-index: 1; height: 100%; width: 100%; max-width: 320px; translate: -100%; transition: all .3s;}
     header .container .mobile-gnb-wrapper .mobile-gnb{display: flex; flex-flow: column; gap:24px;}
     header .container .mobile-gnb-wrapper .mobile-gnb #mobile-gnb-close{cursor: pointer;}
     header .container .mobile-gnb-wrapper .mobile-gnb > li > a{font-size: 16px; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; color: #006938;}
@@ -177,8 +177,8 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
             main .container .event .wrapper .buttons > button{font-size: 14px;}
         }
 
-        /* top-treats */
-        main .container .top-treats{width: 100%;}
+        /* top-treats : swiper 사용으로 인해 주석처리 */ 
+        /* main .container .top-treats{width: 100%;}
         main .container .top-treats .title{text-align: center; font-size: 40px; margin-bottom: 35px;}
         main .container .top-treats .wrapper{display: flex; gap:12px; flex-flow: wrap;}
         main .container .top-treats .wrapper .box{width: calc((100% - 12px * 3) / 4); padding:20px; background-color: whitesmoke; text-align: center; transition: all .2s; cursor: pointer; border-radius: 20px;}
@@ -203,7 +203,38 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
             main .container .top-treats .title{font-size: 22px; margin:0 0 20px;}
             main .container .top-treats .wrapper .box{width: 100%;}
             main .container .top-treats .wrapper .box .item-name{font-size: 20px;}
+        } */
+
+        /* swiper */
+        main .container .top-treats{width: 100%;}
+        main .container .top-treats .title{text-align: center; font-size: 40px; margin-bottom: 35px;}
+        main .container .top-treats .swiper{}
+        main .container .top-treats .swiper .swiper-wrapper{padding:20px 0; display: flex!important;}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide{padding: 6px; height: auto;}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item{background-color: whitesmoke; border-radius: 20px; display: flex; flex-flow: column; align-items: center; padding:20px; cursor: pointer; height: 100%; transition: all .2s;}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item:hover{box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); transform: scale(1.02);}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-img{width: 100%;}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-img > img{width: 100%; display: block; margin:0 auto;}
+        main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-name{ font-size: 23px; text-transform: uppercase; color: #006938; text-align: center;}
+        @media screen and (max-width:1200px){
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-name{font-size: 18.5px;}
         }
+        @media screen and (max-width:1024px){
+            main .container .top-treats .title{font-size: 30px;}
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-img > img{width: 70%;}
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-name{font-size: 18px;}
+        }
+        @media screen and (max-width:640px){
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-img > img{width: 60%;}
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-name{font-size: 20px;}
+        }
+        @media screen and (max-width:480px){
+            main .container .top-treats .title{font-size: 22px; margin:0 0 20px;}
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-img > img{width: 70%;}
+            main .container .top-treats .swiper .swiper-wrapper .swiper-slide .item .item-name{font-size: 18px;}
+        }
+
+
 
         /* offers */
         main .container .offers{width: 100%;}
@@ -317,7 +348,7 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
         main .container .location .wrapper{display: flex; justify-content: space-between;}
         main .container .location .wrapper .img{width: 50%; height: 365px; border-radius: 20px; overflow: hidden; transition: all .3s;}
         main .container .location .wrapper .img > img{width: 100%;}
-        main .container .location .wrapper .content{width: 40%; display: flex; flex-flow: column; justify-content: flex-start; gap:20px;}
+        main .container .location .wrapper .content{width: 45%; display: flex; flex-flow: column; justify-content: flex-start; gap:20px;}
         main .container .location .wrapper .content .titles .title{font-size: 40px;}
         main .container .location .wrapper .content .titles .subtitle{font-size: 20px; color:#e01d3a; font-family: "Edu QLD Beginner"; font-weight: 700;}
         main .container .location .wrapper .content .info > address{font-weight: 300;}

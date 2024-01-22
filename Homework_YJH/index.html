@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krispy Kreme?</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/krispykreme.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="css/krispykreme.css">
 </head>
 <body>
     <!-- header start -->
@@ -88,7 +90,6 @@
     <!-- main start -->
     <main>
         <div class="container">
-
             <!-- event section -->
             <section class="event">
                 <div class="wrapper">
@@ -104,8 +105,8 @@
                 </div>
             </section>
 
-            <!-- top-treat section -->
-            <section class="top-treats">
+            <!-- top-treat section : swiper 사용으로 인해 주석처리 -->
+            <!-- <section class="top-treats">
                 <h2 class="title">TODAY’S TOP TREATS</h2>
                 <div class="wrapper">
                     <div class="box">
@@ -140,6 +141,66 @@
                             Original Glazed<sup>®</sup> Doughnut
                         </div> 
                     </div>
+                </div>
+            </section> -->
+            
+            <section class="top-treats">
+                <h2 class="title">TODAY’S TOP TREATS</h2>
+                <!-- Slider main container -->
+                <div class="swiper">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                    <!-- Slides -->
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="img/doughnut-1.png" alt="">
+                                </div>
+                                <div class="item-name">
+                                    Biscoff<sup>®</sup> Cookie Butter Iced
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="img/doughnut-2.png" alt="">
+                                </div>
+                                <div class="item-name">
+                                    Biscoff<sup>®</sup> Cookie Butter Cheesecake
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="img/doughnut-3.png" alt="">
+                                </div>
+                                <div class="item-name">
+                                    Biscoff<sup>®</sup> Chocolate Cookie Butter Crunch
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="item">
+                                <div class="item-img">
+                                    <img src="img/doughnut-4.png" alt="">
+                                </div>
+                                <div class="item-name">
+                                    Original Glazed<sup>®</sup> Doughnut
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- If we need pagination -->
+                    <!-- <div class="swiper-pagination"></div> -->
+                
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                
+                    <!-- If we need scrollbar -->
+                    <!-- <div class="swiper-scrollbar"></div> -->
                 </div>
             </section>
 
