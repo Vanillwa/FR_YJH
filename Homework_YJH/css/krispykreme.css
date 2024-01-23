@@ -207,7 +207,7 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
 
         /* swiper */
         main .container .top-treats{width: 100%;}
-        main .container .top-treats .title{text-align: center; font-size: 40px; margin-bottom: 35px;}
+        main .container .top-treats .title{text-align: center; font-size: 40px; margin-bottom: 15px;}
         main .container .top-treats .swiper{}
         main .container .top-treats .swiper .swiper-wrapper{padding:20px 0; display: flex!important;}
         main .container .top-treats .swiper .swiper-wrapper .swiper-slide{padding: 6px; height: auto;}
@@ -296,14 +296,16 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
         @media screen and (max-width:1200px){
             main .container .coffee .wrapper .box .item-name{font-size: 18px;}
         }
-        @media screen and (max-width:960px){
+        @media screen and (max-width:1024px){
             main .container .coffee .title{font-size: 30px;}
             main .container .coffee .wrapper .box{width: calc((100% - 12px) / 2);}
+            main .container .coffee .wrapper .box .item-img > img{width: 70%;}
             main .container .coffee .wrapper .box .item-name{font-size: 22px;}
         }
         @media screen and (max-width:640px){
             main .container .coffee .wrapper{flex-flow: column; align-items: center;}
-            main .container .coffee .wrapper .box{width: 80%;}
+            main .container .coffee .wrapper .box{width: 100%;}
+            main .container .coffee .wrapper .box .item-img > img{width: 60%;}
             main .container .coffee .wrapper .box .item-name{font-size: 20px;}
         }
         @media screen and (max-width:480px){
@@ -386,7 +388,6 @@ main{width: 100%; max-width: 1440px; min-width: 320px; margin:150px auto 0; padd
             main .container .location .wrapper .img{width: 100%; height: 200px;}
             main .container .location .wrapper .img > img{top: -30px;}
         }
-
 
         /* disclaimer */
         main .container .disclaimer{width: 100%; padding:0 0 50px;}
