@@ -1,0 +1,10 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+ul,ol,li{list-style: none;}
+a{text-decoration: none;}
+
+.sec{padding:100px 0;}
+.sec .title{font: 28px bold 'inherit'; text-align: center;}
+
+body{text-align: center;}
+
+table{width: 500px; border-collapse: collapse; margin:0 auto;}

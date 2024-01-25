@@ -1,0 +1,29 @@
+<%= member[0].name %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <h2>회원리스트</h2>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>이메일</th>
+        </tr>
+        <% for(let i of member){ %>
+            <tr>
+                <td><%= i._id %></td>
+                <td><%= i.name %></td>
+                <td><%= i.age %></td>
+                <td><%= i.email %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>
