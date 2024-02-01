@@ -38,3 +38,7 @@ new MongoClient(url).connect().then((client)=>{
     console.log('connecting error occured');
 });
 
+app.get('/board', (req, res)=>{
+    let sql = 'SELECT * FROM'
+})
+
