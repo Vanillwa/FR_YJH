@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member</title>
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="member.css">
+</head>
+<body>
+    <%- include ('nav.ejs') %>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>age</th>
+            <th>birthday</th>
+        </tr>
+        <% for(let i of data){ %>
+            <tr>
+                <td><%= i.id %></td>
+                <td><%= i.email %></td>
+                <td><%= i.age %></td>
+                <td><%= i.birthday %></td>
+                <td><input type="button" value="삭제" onclick="del(<%= i.id %>)"></td>
+            </tr>
+        <% } %>
+    </table>
+    <button type="button" onclick="location.href='/member/add'">추가</button>
+    <script>
+        function del(id){
+            if(!confirm('정말 삭제하시겠습니까?')){
+                return;
+            }
+            location.href='/delete?id='+id;
+        }
+    </script>
+</body>
+</html>

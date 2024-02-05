@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include ('nav.ejs') %>
+    <form action="/member-add" method="post" class="add">
+        <div>
+            <label for="">email : </label>
+            <input type="text" name="email">
+        </div>
+        <div>
+            <label for="">age : </label>
+            <input type="text" name="age">
+        </div>
+        <div>
+            <label for="">birthday : </label>
+            <input type="date" name="birthday">
+        </div>
+        <input type="submit" value="등록">
+    </form>
+</body>
+</html>

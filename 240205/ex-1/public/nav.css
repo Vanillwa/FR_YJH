@@ -1,0 +1,5 @@
+ol,ul,li{list-style: none;}
+
+header .container{display: flex; gap:30px;}
+header .container .gnb{display: flex;}
+header .container .gnb > li{padding:5px;}
