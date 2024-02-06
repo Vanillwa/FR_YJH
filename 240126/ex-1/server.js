@@ -11,7 +11,7 @@ app.listen(port, ()=>{
 })
 
 const {MongoClient} = require('mongodb')
-const url = 'mongodb+srv://admin:1111@cluster0.fhcel0y.mongodb.net/?retryWrites=true&w=majority'
+const url = 'mongo db url'
 const dbName = 'member';
 
 new MongoClient(url).connect().then((client)=>{

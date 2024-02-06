@@ -30,7 +30,7 @@ app.get('/board', async(request, response) => {
 const {mongoClient, MongoClient} = require('mongodb');
 
 let db;
-const url = 'mongodb+srv://admin:1111@cluster0.fhcel0y.mongodb.net/?retryWrites=true&w=majority';
+const url = 'mongo db url';
 new MongoClient(url).connect().then((client)=>{
     console.log('db connected');
     db = client.db('member');
