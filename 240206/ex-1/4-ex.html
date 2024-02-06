@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{text-align: center; background-color: black;}
+        #btn { font-size: 50px;}
+    </style>
+</head>
+<body>
+    <button type="button" id="btn">버 튼 버 튼</button>
+    <div id="count"></div>
+    <script>
+        let btn = document.getElementById('btn');
+        let i = 1;
+        btn.addEventListener('click', function(){
+            this.innerText = i++;
+        })
+    </script>
+</body>
+</html>
