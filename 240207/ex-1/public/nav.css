@@ -1,0 +1,7 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+li,ol,ul{list-style: none;}
+a{text-decoration: none;}
+
+header{width: 100%; background-color: lightgray;}
+header .container{display: flex; width: 1000px; margin:0 auto; justify-content: space-between; padding:30px 0;}
+header .container #gnb{display: flex; gap:20px;}

@@ -1,0 +1,7 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+.content{padding:50px 0 0; text-align: center;}
+.content h2{}
+.content table{border-collapse: collapse; border-spacing: 0; margin:10px auto;}
+.content th,td{border:1px solid black; padding:5px;}
+.content > button{font-size: 40px; padding: 5px 10px;}

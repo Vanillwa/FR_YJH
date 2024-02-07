@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Member</title>
+        <link rel="stylesheet" href="nav.css" />
+        <link rel="stylesheet" href="member.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <%- include ('nav.ejs') %>
+        <section class="content">
+            <h2>Member</h2>
+            <label for="team">Team : </label>
+            <select name="team" id="team" onchange="teamSelect(this.value)">
+                <option value="">default</option>
+                <option value="engineering">engineering</option>
+                <option value="marketing">marketing</option>
+                <option value="sales">sales</option>
+            </select>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>AdmissionDate</th>
+                    <th>Birthday</th>
+                    <th>삭제</th>
+                </tr>
+                <% for(let i of data){ %>
+                <tr>
+                    <td><%= i.id %></td>
+                    <td><%= i.name %></td>
+                    <td><%= i.team %></td>
+                    <td><%= i.position %></td>
+                    <td><%= i.emailAddress %></td>
+                    <td><%= i.phoneNumber %></td>
+                    <td><%= i.admissionDate.toLocaleDateString(); %></td>
+                    <td><%= i.birthday.toLocaleDateString(); %></td>
+                    <td>
+                        <input
+                            type="button"
+                            value="삭제"
+                            onclick="del(<%= i.id %>)"
+                        />
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+            <button type="button" onclick="location.href='/member/add'">
+                ADD
+            </button>
+        </section>
+        <script>
+            let url = new URL(window.location.href)
+            let param = url.searchParams
+            let teamValue = param.get('team')
+
+            $('#team').val(teamValue).prop("selected",true);
+
+            function del(id) {
+                if (!confirm("정말 삭제하시겠습니까?")) return;
+                location.href = "/member/del?id=" + id;
+            }
+
+            function teamSelect(value){
+                location.href='/member?team='+value;
+            }
+        </script>
+    </body>
+</html>
