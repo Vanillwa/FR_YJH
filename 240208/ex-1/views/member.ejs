@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Member</title>
+        <link rel="stylesheet" href="nav.css" />
+        <link rel="stylesheet" href="member.css" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <%- include ('nav.ejs') %>
+        <section class="content">
+            <h2>Member</h2>
+            <label for="team">Team : </label>
+            <select name="team" id="team" onchange="teamSelect(this.value)">
+                <option value="">default</option>
+                <option value="engineering">engineering</option>
+                <option value="marketing">marketing</option>
+                <option value="sales">sales</option>
+            </select>
+            <button type="button" onclick="location.href='/member/add'" class="addBtn">
+                멤버 추가
+            </button>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>Position</th>
+                    <th>삭제/수정</th>
+                </tr>
+                <% for(let i of data){ %>
+                <tr>
+                    <td><%= i.id %></td>
+                    <td><a href="/member/view/<%= i.id %>"><%= i.name %></a></td>
+                    <td><%= i.team %></td>
+                    <td><%= i.position %></td>
+                    <td class="btns">
+                        <form action="/member/<%= i.id %>?_method=DELETE" method="post">
+                            <input type="button" value="삭제" onclick="del(this.form)">
+                        </form>
+                        <input type="button" value="수정" onclick="modify('<%= i.id %>')">
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+            
+        </section>
+        <script>
+            let url = new URL(window.location.href);
+            let param = url.searchParams;
+            let teamValue = param.get("team");
+
+            $("#team").val(teamValue).prop("selected", true);
+
+            function del(f) {
+                if (!confirm("정말 삭제하시겠습니까?")) return;
+                f.submit();
+            }
+
+            function modify(id){
+                location.href="/member/update/"+id;
+            }
+
+            function teamSelect(value) {
+                location.href = "/member?team=" + value;
+            }
+
+            function formatDate(dateString) {
+                var date = new Date(dateString);
+
+                var year = date.getFullYear();
+                var month = ("0" + (date.getMonth() + 1)).slice(-2);
+                var day = ("0" + date.getDate()).slice(-2); 
+                
+                var formattedDate = year + "-" + month + "-" + day;
+                return formattedDate;
+            }
+        </script>
+    </body>
+</html>

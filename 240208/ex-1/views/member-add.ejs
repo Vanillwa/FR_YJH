@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Member</title>
+        <link rel="stylesheet" href="../nav.css">
+        <link rel="stylesheet" href="../member-add.css">
+    </head>
+    <body>
+        <%- include ('nav.ejs') %>
+        <section class="content">
+            <h2>CREATE</h2>
+            <form action="./add" method="post">
+                <div>
+                    <label for="">name :</label>
+                    <input type="text" name="name">
+                </div>
+                <div>
+                    <label for="">team :</label>
+                    <select name="team">
+                        <option value="">default</option>
+                        <option value="engineering">engineering</option>
+                        <option value="marketing">marketing</option>
+                        <option value="sales">sales</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">position :</label>
+                    <input type="text" name="position">
+                </div>
+                <div>
+                    <label for="">email :</label>
+                    <input type="text" name="emailAddress">
+                </div>
+                <div>
+                    <label for="">phone :</label>
+                    <input type="text" name="phoneNumber">
+                </div>
+                <div>
+                    <label for="">AdmissionDate :</label>
+                    <input type="date" name="admissionDate">
+                </div>
+                <div>
+                    <label for="">Birthday :</label>
+                    <input type="date" name="birthday">
+                </div>
+                <input type="submit" value="ADD" class="btn">
+            </form>
+        </section>
+    </body>
+</html>

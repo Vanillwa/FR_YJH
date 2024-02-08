@@ -1,0 +1,6 @@
+.content{padding:50px 0; width: 1000px; margin: 0 auto;}
+
+.content h2{text-align: center; padding-bottom: 10px;}
+.content form{margin:0 auto; text-align: center; display: flex; flex-flow: column; gap:5px; align-items: center;}
+
+.content form .btn{width: 200px;}

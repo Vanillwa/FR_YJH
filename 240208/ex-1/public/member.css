@@ -1,0 +1,9 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+.content{padding:50px 0 0; text-align: center;}
+.content h2{padding:0 0 10px;}
+.content table{border-collapse: collapse; border-spacing: 0; margin:10px auto;}
+.content th,td{border-top:1px solid black; border-bottom: 1px solid black; padding:10px 20px;}
+.content .btns > form{display: inline;}
+
+.content .addBtn{width: 80px;}

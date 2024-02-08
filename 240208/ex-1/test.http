@@ -1,0 +1,8 @@
+get http://localhost:8081
+
+post http://localhost:8081/member
+Content-Type: application/json
+
+{
+
+}
