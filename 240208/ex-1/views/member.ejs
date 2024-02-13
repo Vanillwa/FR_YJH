@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Member</title>
-        <link rel="stylesheet" href="nav.css" />
-        <link rel="stylesheet" href="member.css" />
+        <link rel="stylesheet" href="/nav.css" />
+        <link rel="stylesheet" href="/member.css" />
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
@@ -33,19 +33,16 @@
                 <% for(let i of data){ %>
                 <tr>
                     <td><%= i.id %></td>
-                    <td><a href="/member/view/<%= i.id %>"><%= i.name %></a></td>
+                    <td><a href="/member/<%= i.id %>/view"><%= i.name %></a></td>
                     <td><%= i.team %></td>
                     <td><%= i.position %></td>
                     <td class="btns">
-                        <form action="/member/<%= i.id %>?_method=DELETE" method="post">
-                            <input type="button" value="삭제" onclick="del(this.form)">
-                        </form>
+                        <input type="button" value="삭제" onclick="del('<%= i.id %>')">
                         <input type="button" value="수정" onclick="modify('<%= i.id %>')">
                     </td>
                 </tr>
                 <% } %>
             </table>
-            
         </section>
         <script>
             let url = new URL(window.location.href);
@@ -54,13 +51,17 @@
 
             $("#team").val(teamValue).prop("selected", true);
 
-            function del(f) {
+            function del(id) {
                 if (!confirm("정말 삭제하시겠습니까?")) return;
-                f.submit();
+
+                fetch('/member/'+id, {method : 'DELETE'})
+                .then(()=>{
+                    location.reload();
+                })
             }
 
             function modify(id){
-                location.href="/member/update/"+id;
+                location.href="/member/"+id+"/update";
             }
 
             function teamSelect(value) {

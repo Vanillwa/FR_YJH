@@ -36,7 +36,7 @@ app.get('/member', async(req, res)=>{
     }
 })
 
-app.get('/member/view/:id', async(req, res)=>{
+app.get('/member/:id/view', async(req, res)=>{
     let {id} = req.params
     await models.Member.findByPk(id).then((data)=>{
         res.render('member-view', {data})
@@ -50,6 +50,8 @@ app.get('/member/add', (req, res)=>{
 app.post('/member/add', async(req, res)=>{
     await models.Member.create(req.body).then(()=>{
         res.redirect('../member')
+    }).catch(error => {
+        console.log('error occured');
     })
 })
 
@@ -58,11 +60,11 @@ app.delete('/member/:id', async(req, res)=>{
     await models.Member.destroy({
         where : {id : id}
     }).then(()=>{
-        res.redirect('../../member')
+        res.redirect('/member');
     })
 })
 
-app.get('/member/update/:id', async(req, res)=>{
+app.get('/member/:id/update', async(req, res)=>{
     let {id} = req.params
     await models.Member.findByPk(id).then((data)=>{
         res.render('member-update', {data})
@@ -72,6 +74,6 @@ app.get('/member/update/:id', async(req, res)=>{
 app.put('/member/:id', async(req, res)=>{
     let {id} = req.params
     await models.Member.update(req.body, {where : {id : id}}).then(()=>{
-        res.redirect('../../member')
+        res.redirect('/member')
     })
 })

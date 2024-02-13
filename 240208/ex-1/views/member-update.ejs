@@ -4,63 +4,104 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Update</title>
-        <link rel="stylesheet" href="../../nav.css" />
-        <link rel="stylesheet" href="../../member-add.css" />
+        <link rel="stylesheet" href="/nav.css" />
+        <link rel="stylesheet" href="/member-update.css" />
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
         <%- include ('nav.ejs') %>
         <section class="content">
             <h2>UPDATE</h2>
-            <form action="/member/<%= data.id %>?_method=PUT" method="post">
+            <form name="update-form">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <label for="">name :</label>
+                        </th>
+                        <td>
+                            <input
+                                type="text"
+                                name="name"
+                                value="<%= data.name %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">team :</label>
+                        </th>
+                        <td>
+                            <select name="team" id="team">
+                                <option value="">default</option>
+                                <option value="engineering">engineering</option>
+                                <option value="marketing">marketing</option>
+                                <option value="sales">sales</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">position :</label>
+                        </th>
+                        <td>
+                            <input
+                                type="text"
+                                name="position"
+                                value="<%= data.position %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">email :</label>
+                        </th>
+                        <td>
+                            <input
+                                type="text"
+                                name="emailAddress"
+                                value="<%= data.emailAddress %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">phone :</label>
+                        </th>
+                        <td>
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                value="<%= data.phoneNumber %>"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">AdmissionDate :</label>
+                        </th>
+                        <td>
+                            <input
+                                type="date"
+                                name="admissionDate"
+                                id="admissionDate"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="">Birthday :</label>
+                        </th>
+                        <td>
+                            <input type="date" name="birthday" id="birthday" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="btn-cell">
+                            <input type="button" value="UPDATE" class="btn" onclick="update(this.form)" />
+                        </td>
+                    </tr>
+                </table>
                 <input type="hidden" name="id" value="<%= data.id %>" />
-                <input type="hidden" name="_method" value="PUT"/>
-                <div>
-                    <label for="">name :</label>
-                    <input type="text" name="name" value="<%= data.name %>" />
-                </div>
-                <div>
-                    <label for="">team :</label>
-                    <select name="team" id="team">
-                        <option value="">default</option>
-                        <option value="engineering">engineering</option>
-                        <option value="marketing">marketing</option>
-                        <option value="sales">sales</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="">position :</label>
-                    <input
-                        type="text"
-                        name="position"
-                        value="<%= data.position %>"
-                    />
-                </div>
-                <div>
-                    <label for="">email :</label>
-                    <input
-                        type="text"
-                        name="emailAddress"
-                        value="<%= data.emailAddress %>"
-                    />
-                </div>
-                <div>
-                    <label for="">phone :</label>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        value="<%= data.phoneNumber %>"
-                    />
-                </div>
-                <div>
-                    <label for="">AdmissionDate :</label>
-                    <input type="date" name="admissionDate" id="admissionDate">
-                </div>
-                <div>
-                    <label for="">Birthday :</label>
-                    <input type="date" name="birthday" id="birthday" />
-                </div>
-                <input type="submit" value="UPDATE" class="btn" />
             </form>
         </section>
         <script>
@@ -72,14 +113,22 @@
 
                 var year = date.getFullYear();
                 var month = ("0" + (date.getMonth() + 1)).slice(-2);
-                var day = ("0" + date.getDate()).slice(-2); 
-                
+                var day = ("0" + date.getDate()).slice(-2);
+
                 var formattedDate = year + "-" + month + "-" + day;
                 return formattedDate;
             }
 
             $("#admissionDate").val(formatDate("<%= data.admissionDate %>"));
             $("#birthday").val(formatDate("<%= data.birthday %>"));
+
+            function update(f){
+                let body = new URLSearchParams(new FormData(f))
+                fetch('/member/'+f.id.value, {method : 'put', body})
+                .then(()=>{
+                    location.href='/member/'+f.id.value+'/view'
+                })
+            }
         </script>
     </body>
 </html>

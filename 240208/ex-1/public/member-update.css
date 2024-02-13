@@ -1,9 +1,6 @@
 .content{padding:50px 0; width: 1000px; margin: 0 auto;}
-
 .content h2{text-align: center; padding-bottom: 10px;}
 .content .table{margin:0 auto; border-collapse: collapse; border-spacing: 0;}
-.content .table tr{}
 .content .table th{text-align: right;}
 .content .table th, td{padding: 10px 5px;}
 .content .table .btn-cell{text-align: center;}
-.content form .btn{width: 200px;}

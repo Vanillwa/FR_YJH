@@ -4,8 +4,8 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>View</title>
-        <link rel="stylesheet" href="../../nav.css" />
-        <link rel="stylesheet" href="../../member-view.css" />
+        <link rel="stylesheet" href="/nav.css" />
+        <link rel="stylesheet" href="/member-view.css" />
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
@@ -45,7 +45,14 @@
                     <th>Birthday</th>
                     <td><%= data.birthday.toLocaleDateString() %></td>
                 </tr>
+                <tr>
+                    <td colspan="2" class="btn-cell">
+                        <input type="button" value="삭제" onclick="del('<%= data.id %>')">
+                        <input type="button" value="수정" onclick="modify('<%= data.id %>')">
+                    </td>
+                </tr>
             </table>
         </section>
+        <script src="/javascript/member-view.js"></script>
     </body>
 </html>
