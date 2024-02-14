@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+app.use(express.json()); 
+app.use(express.urlencoded({extended : false}));
 
 const mysql = require('mysql');
 const dbConfig = {
@@ -42,4 +44,13 @@ app.get('/shop', (req, res)=>{
 
 app.get('/contact', (req, res)=>{
     res.render('contact.ejs')
+})
+
+app.post('/add', (req, res)=>{
+    let {name, age} = req.body;
+    let sql = 'INSERT INTO test (name, age) VALUES (?, ?)';
+    db.query(sql, [name,age], (error, result)=>{
+        if(error) throw error;
+        console.log('INSERT SUCCESS');
+    })
 })

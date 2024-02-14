@@ -14,17 +14,17 @@
             <h2 class="title">Main</h2>
             <div class="row text-center">
                 <div class="col">
-                    <table>
-                        <tr>
-                            <th class="col-1">NO</th>
-                            <th class="col-6">EMAIL</th>
-                            <th class="col-1">BIRTHDAY</th>
-                            <th class="col-1">GENDER</th>
-                            <th class="col-1">AGE</th>
-                            <th class="col-1">HEIGHT</th>
-                            <th class="col-2">WEIGHT</th>
-                        </tr>
-                    </table>
+                    <form action="/add" class="form-box" method="post">
+                        <div class="box">
+                            <label for="">이름</label>
+                            <input type="text" name="name">
+                        </div>
+                        <div class="box">
+                            <label for="">나이</label>
+                            <input type="text" name="age">
+                        </div>
+                        <input type="submit" value="전송">
+                    </form>
                 </div>
             </div>
         </div>
