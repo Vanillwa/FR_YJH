@@ -6,9 +6,13 @@
             </a>
         </div>
         <ul class="gnb">
-            <li><a href="/">Main</a></li>
-            <li><a href="/board">Board</a></li>
-            <li><a href="/login">Log In</a></li>
+            <li><a href="/">메인</a></li>
+            <li><a href="/board">게시판</a></li>
+            <% if(!userData){ %>
+                <li><a href="/login">로그인</a></li>
+            <% }else{ %>
+                <li><a href="/logout">로그아웃</a></li>
+            <% } %>
         </ul>
     </div>
 </header>

@@ -10,7 +10,7 @@
     </head>
     <body>
         <%- include ('nav.ejs') %>
-        <section class="content">
+        <section class="content" id="content">
             <h2>Member</h2>
             <label for="team">Team : </label>
             <select name="team" id="team" onchange="teamSelect(this.value)">
@@ -22,27 +22,29 @@
             <button type="button" onclick="location.href='/member/add'" class="addBtn">
                 멤버 추가
             </button>
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Team</th>
-                    <th>Position</th>
-                    <th>삭제/수정</th>
-                </tr>
-                <% for(let i of data){ %>
-                <tr>
-                    <td><%= i.id %></td>
-                    <td><a href="/member/<%= i.id %>/view"><%= i.name %></a></td>
-                    <td><%= i.team %></td>
-                    <td><%= i.position %></td>
-                    <td class="btns">
-                        <input type="button" value="삭제" onclick="del('<%= i.id %>')">
-                        <input type="button" value="수정" onclick="modify('<%= i.id %>')">
-                    </td>
-                </tr>
-                <% } %>
-            </table>
+            <div id="table-wrapper">
+                <table id="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Team</th>
+                        <th>Position</th>
+                        <th>삭제/수정</th>
+                    </tr>
+                    <% for(let i of data){ %>
+                    <tr>
+                        <td><%= i.id %></td>
+                        <td><a href="/member/<%= i.id %>/view"><%= i.name %></a></td>
+                        <td><%= i.team %></td>
+                        <td><%= i.position %></td>
+                        <td class="btns">
+                            <input type="button" value="삭제" onclick="del('<%= i.id %>')">
+                            <input type="button" value="수정" onclick="modify('<%= i.id %>')">
+                        </td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
         </section>
         <script>
             let url = new URL(window.location.href);
@@ -56,7 +58,7 @@
 
                 fetch('/member/'+id, {method : 'DELETE'})
                 .then(()=>{
-                    location.reload();
+                    $('#table-wrapper').load(location.href+' #table-wrapper');
                 })
             }
 

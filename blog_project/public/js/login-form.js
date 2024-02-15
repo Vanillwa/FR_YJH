@@ -48,26 +48,26 @@ function send(f) {
 
     $('.error').removeClass('show');
 
-    // if(email =='' && pwd == ''){
-    //     $('#both-empty').addClass('show');
-    //     $('#id').focus();
-    //     return;
-    // }
-    // if(email == ''){
-    //     $('#id-empty').addClass('show');
-    //     $('#id').focus();
-    //     return;
-    // }
-    // if(pwd == ''){
-    //     $('#pwd-empty').addClass('show');
-    //     $('#pwd').focus();
-    //     return;
-    // }
-    // if(id.length<4 || id.length>12){
-    //     $('#id-wrong-type').addClass('show');
-    //     $('#id').focus();
-    //     return;
-    // }
+    if(email =='' && pwd == ''){
+        $('#both-empty').addClass('show');
+        $('#email').focus();
+        return;
+    }
+    if(email == ''){
+        $('#email-empty').addClass('show');
+        $('#email').focus();
+        return;
+    }
+    if(pwd == ''){
+        $('#pwd-empty').addClass('show');
+        $('#pwd').focus();
+        return;
+    }
+    if(email.length<3 || email.length>12){
+        $('#email-wrong-type').addClass('show');
+        $('#email').focus();
+        return;
+    }
     // if(!passwordPattern.test(pwd)){
     //     $('#pwd-wrong-type').addClass('show');
     //     $('#pwd').focus();
@@ -80,7 +80,12 @@ function send(f) {
         .then(text => {
             console.log(text)
             if (text == 'success') {
-                
+                alert('로그인 성공')
+                location.href='/'
+            }else if(text == 'pwd-fail'){
+                alert('비밀번호가 틀렸습니다.')
+            }else{
+                alert('존재하지 않는 계정입니다.')
             }
         })
     //로그인 검사
