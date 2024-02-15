@@ -21,14 +21,14 @@ app.listen(8081, () => {
 });
 
 app.get("/", (req, res) => {
-    res.render("index", {userData : req.session.user});
+    res.render("index", { userData: req.session.user });
 });
 
 app.get("/login", (req, res) => { // 로그인 페이지
     if (req.session.user) { // 이미 로그인 했다면 빠꾸
         console.log("already login");
         res.redirect("/");
-    }else{
+    } else {
         res.render("login-form");
     }
 });
@@ -42,9 +42,9 @@ app.post("/login", async (req, res) => { // 로그인
         const pwd = req.body.pwd;
         let account
 
-        try{
+        try {
             account = await models.member.findOne({ where: { email: email } })
-        }catch{
+        } catch {
             res.status(500).send("error")
         }
 
@@ -61,70 +61,80 @@ app.post("/login", async (req, res) => { // 로그인
     }
 });
 
-app.get('/logout', (req, res)=>{ // 로그아웃
-    if(req.session.user){
+app.get('/logout', (req, res) => { // 로그아웃
+    if (req.session.user) {
         req.session.destroy()
         res.redirect('/')
     }
 })
 
-app.get('/board', async (req, res)=>{ // 게시판 조회
+app.get('/board', async (req, res) => { // 게시판 조회
     let page = (req.query.page) ? req.query.page : 1
     let limit = 5
-    let offset = (page -1) * limit
     let totalPost = await models.board.count()
-    let totalPage = Math.ceil(totalPost/limit)
+    let totalPage = Math.ceil(totalPost / limit)
+    if (page > totalPage) {
+        page = totalPage;
+    }
+
+    let offset = (page - 1) * limit
 
     const boardList = await models.board.findAll({
-        include : [{
-            model : models.member,
-            attributes : ['nickname']
+        include: [{
+            model: models.member,
+            attributes: ['nickname']
         }],
-        order : [[ 'id' , 'DESC']],
+        order: [['id', 'DESC']],
         offset,
         limit
     })
-    res.render('board', {userData : req.session.user, boardList, totalPage})
+    res.render('board', { userData: req.session.user, boardList, totalPage })
 })
 
-app.get('/board/post', (req, res)=>{ // 게시글 작성 페이지
-    if(req.session.user){
-        res.render('board-insert', {userData : req.session.user})
-    }else{
+app.get('/board/post', (req, res) => { // 게시글 작성 페이지
+    if (req.session.user) {
+        res.render('board-insert', { userData: req.session.user })
+    } else {
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.write("<script>alert('로그인이 필요한 서비스입니다')</script>");
         res.write("<script>location.href='/login'</script>");
     }
 })
 
-app.post('/board/post', async (req, res)=>{ // 글 insert
-    await models.board.create(req.body).then(()=>{
+app.post('/board/post', async (req, res) => { // 글 insert
+    await models.board.create(req.body).then(() => {
         res.redirect('/board')
-    }).catch((error)=>{
+    }).catch((error) => {
         res.status(500).send(error)
     })
 })
 
-app.get('/board/:id', async(req, res)=>{ // 글 상세 뷰
-    const {id} = req.params
+app.get('/board/:id', async (req, res) => { // 글 상세 뷰
+    const { id } = req.params
 
-    try{
-        let data = await models.board.findByPk(id)
-        res.render('board-view', {data, userData : req.session.user})
-    }catch{
+    try {
+        let data = await models.board.findOne({
+            include: [{
+                model: models.member,
+                attributes: ['nickname']
+            }],
+            where : {id : id}
+        })
+        res.render('board-view', { data, userData: req.session.user })
+    } catch {
         res.status(500).send('error')
     }
 })
 
-app.delete('/board/:id', async(req, res)=>{
-    const {id} = req.params
-    if(!req.session.user || req.session.user.id != id){ // 로그인 안했으면 빠꾸
-        res.status(200).send('fail')
-    }
+app.delete('/board/:id', async (req, res) => {
+    const { id } = req.params
+    // if (!req.session.user || req.session.user.id != id) { // 로그인 안했으면 빠꾸
+    //     return res.status(200).send('fail')
+    // }
 
-    await models.board.destroy({where : {id : id}}).then(()=>{
-        res.status(200).send('success')
-    }).catch((error)=>{
+    await models.board.destroy({ where: { id : id } }).then(() => {
+        res.send("success")
+    }).catch((error) => {
         res.status(500).send(error)
     })
 })

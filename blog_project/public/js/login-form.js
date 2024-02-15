@@ -48,22 +48,22 @@ function send(f) {
 
     $('.error').removeClass('show');
 
-    if(email =='' && pwd == ''){
+    if (email == '' && pwd == '') {
         $('#both-empty').addClass('show');
         $('#email').focus();
         return;
     }
-    if(email == ''){
+    if (email == '') {
         $('#email-empty').addClass('show');
         $('#email').focus();
         return;
     }
-    if(pwd == ''){
+    if (pwd == '') {
         $('#pwd-empty').addClass('show');
         $('#pwd').focus();
         return;
     }
-    if(email.length<3 || email.length>12){
+    if (email.length < 3 || email.length > 12) {
         $('#email-wrong-type').addClass('show');
         $('#email').focus();
         return;
@@ -74,29 +74,30 @@ function send(f) {
     //     return;
     // }
     let body = new URLSearchParams(new FormData(f))
-    fetch('/login', {
-        method: 'POST', body, redirect: 'follow'
+    fetch('/login', { method: 'POST', body, redirect: 'follow'
     }).then(rs => rs.text())
         .then(text => {
-            console.log(text)
             if (text == 'success') {
                 alert('로그인 성공')
-                location.href='/'
-            }else if(text == 'pwd-fail'){
-                alert('비밀번호가 틀렸습니다.')
-            }else{
+                location.href = '/'
+            } else if (text == 'pwd-fail') {
+                alert('비밀번호가 일치하지 않습니다.')
+                $('#pwd').val('').focus();
+            } else {
                 alert('존재하지 않는 계정입니다.')
+                $('#login-form').reset();
+                $('#id').focus();
             }
         })
     //로그인 검사
-    // if(id == userInfo.id && pwd == userInfo.pwd){
+    // if (id == userInfo.id && pwd == userInfo.pwd) {
     //     alert('로그인 성공');
-    //     location.href='index.html';
-    // }else if(id == userInfo.id && pwd != userInfo.pwd){
+    //     location.href = 'index.html';
+    // } else if (id == userInfo.id && pwd != userInfo.pwd) {
     //     alert('비밀번호가 일치하지 않습니다.')
     //     $('#pwd').val('').focus();
     //     return;
-    // }else{
+    // } else {
     //     alert('존재하지 않는 계정입니다.');
     //     $('#login-form')[0].reset();
     //     $('#id').focus();
