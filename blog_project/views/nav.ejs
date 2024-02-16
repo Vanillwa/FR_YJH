@@ -8,11 +8,18 @@
         <ul class="gnb">
             <li><a href="/">메인</a></li>
             <li><a href="/board">게시판</a></li>
-            <% if(!userData){ %>
-                <li><a href="/login">로그인</a></li>
+            <% if(!user){ %>
+                <li><span onclick="gotologin()">로그인</span></li>
             <% }else{ %>
+                <li>접속자 : <%= user.nickname %></li>
                 <li><a href="/logout">로그아웃</a></li>
             <% } %>
         </ul>
     </div>
+    <script>
+        function gotologin(){
+            let path = window.location.href
+            location.href='/login?path='+path
+        }
+    </script>
 </header>

@@ -5,11 +5,14 @@ function del(id){
     fetch('/board/'+id, {method : 'delete'}).then(rs => rs.text())
     .then(text => {
         if(text == 'success'){
-            alert('삭제 성공')
             location.href='/board'
         }else{
             alert('삭제 실패')
             return
         }
     })
+}
+
+function update(id){
+    location.href='/board/'+id+'/update'
 }

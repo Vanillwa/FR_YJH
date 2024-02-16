@@ -25,10 +25,10 @@
                 <span>
                     작성자 : <%= data.member.nickname %> | 조회수 : <%= data.readhit %> | 작성일 : <%= data.createdAt.toLocaleDateString() %>
                 </span>
-                <% if((userData && userData.id == data.writer)||(userData && userData.id == 1)){ %>
+                <% if((user && user.id == data.writer)||(user && user.id == 1)){ %>
                 <span class="btns">
                     <button type="button" onclick="del('<%= data.id %>')">삭제</button>
-                    <button type="button" onclick="update()">수정</button>
+                    <button type="button" onclick="update('<%= data.id %>')">수정</button>
                 </span>
                 <% } %>
             </div>

@@ -19,12 +19,12 @@
             <form action="/login" method="post" id="login-form">
                 <div class="input-form">
                     <div class="wrapper">
-                        <label for="id" class="label">Email</label>
-                        <input type="text" id="email" name="email" class="input">
+                        <label for="email" class="label">Email</label>
+                        <input type="text" id="email" name="email" class="input" autoComplete="on">
                     </div>
                     <div class="wrapper">
                         <label for="pwd" class="label">Password</label>
-                        <input type="password" id="pwd" name="pwd" class="input">
+                        <input type="password" id="pwd" name="pwd" class="input" autoComplete="off">
                         <i class="bi bi-eye-slash" id="pwd-toggle"></i>
                         <p id="capslock-alert">
                             <strong>CapsLock</strong>이 켜져있습니다.
@@ -46,11 +46,11 @@
                         올바르지 않은 <strong>비밀번호</strong> 형식입니다.
                     </p>
                     <div class="buttons">
-                        <button type="button" id="sign-in" class="sign-in" onclick="send(this.form)">SIGN IN</button>
-                        <button type="button" class="create" onclick="">CREATE ACCOUNT</button>
+                        <button type="button" id="sign-in" class="sign-in" onclick="send(this.form)">로그인</button>
+                        <button type="button" class="create" onclick="">회원가입</button>
                     </div>
                     <div class="forgot">
-                        <a href="#">Forgot Password?</a>
+                        <a href="#">비밀번호 찾기</a>
                     </div>
                     <div class="sign-in-google">
                         <p>or</p>
@@ -60,6 +60,7 @@
                         </button>
                     </div>
                 </div>
+                <input type="hidden" name="path" value="<%= path %>">
             </form>
         </div>
     </div>
