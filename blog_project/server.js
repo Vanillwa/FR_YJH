@@ -3,6 +3,7 @@ const session = require("express-session");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const models = require("./models");
+const nodemailer = require("nodemailer");
 const app = express();
 
 app.set("view engine", "ejs");
@@ -60,6 +61,23 @@ passport.deserializeUser(async (user, done) => {
     }
 });
 
+const smtpTransPort = nodemailer.createTransport({
+    pool: true,
+    maxConnections: 1,
+    service: "naver",
+    host: "smtp.naver.com",
+    port: 587,
+    secure: false,
+    requireTLS: true,
+    auth: {
+        user: "wjdgus3044@naver.com",
+        pass: "yjh40523263!@",
+    },
+    tls: {
+        rejectUnauthorized: false,
+    },
+});
+
 app.listen(8081, () => {
     console.log("server on http://localhost:8081/");
 });
@@ -69,12 +87,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    let path = req.query.path || '/'
+    let path = req.query.path || "/";
     if (req.user) {
         // 이미 로그인 했다면 빠꾸
         res.redirect(path);
     } else {
-        res.render("login-form", {path});
+        res.render("login-form", { path });
     }
 });
 
@@ -216,3 +234,80 @@ app.put("/board/:id", async (req, res) => {
             res.status(500).send(error);
         });
 });
+
+app.get("/signup", (req, res) => {
+    res.render("signup-form");
+});
+
+app.post("/emailCheck", async (req, res) => {
+    let { email } = req.body;
+    let result = await models.member.findOne({ where: { email } });
+    if (result) {
+        return res.send("used");
+    } else {
+        return res.send("available");
+    }
+});
+
+app.post("/emailVerify", async (req, res) => {
+    const number = Math.floor(100000 + Math.random() * 900000);
+    req.session.verifyNum = number;
+
+    const { email } = req.body; //사용자가 입력한 이메일
+
+    const mailOptions = {
+        from: "wjdgus3044@naver.com", // 발신자 이메일 주소.
+        to: email, //사용자가 입력한 이메일 -> 목적지 주소 이메일
+        subject: " 인증 관련 메일 입니다. ",
+        html: "<h1>인증번호를 입력해주세요 \n\n\n\n\n\n</h1>" + number,
+    };
+    smtpTransPort.sendMail(mailOptions, (err, response) => {
+        console.log("response", response);
+        //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
+        if (err) {
+            res.json({ message: "fail" });
+            smtpTransport.close(); //전송종료
+            return;
+        } else {
+            res.json({ message: "success" });
+            smtpTransport.close(); //전송종료
+            return;
+        }
+    });
+});
+
+app.post("/verifyNumCheck", (req, res) => {
+    const { number } = req.body;
+    const verifyNum = req.session.verifyNum;
+    console.log("verifyNum : " + verifyNum);
+    console.log("number : " + number);
+    if (number == verifyNum) {
+        return res.send("success");
+    } else {
+        return res.send("fail");
+    }
+});
+
+app.post("/nicknameCheck", async (req, res) => {
+    const { nickname } = req.body;
+    let result = await models.member.findOne({ where: { nickname } });
+    if (result) {
+        return res.send("used");
+    } else {
+        return res.send("available");
+    }
+});
+
+app.post('/signup', async (req, res)=>{
+    await models.member
+        .create(req.body)
+        .then(() => {
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+            res.write("<script>alert('성공적으로 회원가입이 되었습니다.')</script>");
+            res.write("<script>location.href='/login'</script>");
+            return;
+        })
+        .catch((error) => {
+            res.status(500).send(error);
+        });
+})

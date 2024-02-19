@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/signup-form.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 class="logo">LOGO</h2>
+            <i class="bi bi-x-lg" onclick="location.href='/'"></i>
+        </div>
+        <div class="main">
+            <h2>SIGN UP</h2>
+            <form action="/signup" method="post" id="signup-form">
+                <div class="input-form">
+                    <div class="box">
+                        <div class="wrapper">
+                            <label for="email" class="label">Email</label>
+                            <input type="text" id="email" name="email" class="input" autoComplete="off">
+                        </div>
+                    </div>
+                    <p class="alert email-alert clear" id="email-available">
+                        사용 가능한 <strong>이메일</strong>입니다.
+                    </p>
+                    <p class="alert email-alert fail" id="email-used">
+                        이미 가입된 <strong>이메일</strong>입니다.
+                    </p>
+                    <p class="alert email-alert fail" id="email-wrongtype">
+                        <strong>이메일</strong> 형식이 올바르지 않습니다.
+                    </p>
+                    <div class="box verifyBox">
+                        <div class="wrapper">
+                            <label for="verifyNum" class="label">Verify</label>
+                            <input type="text" id="verifyNum" name="verifyNum" class="input verify" autoComplete="off" disabled>
+                        </div>
+                        <input type="button" class="verify" value="인증" onclick="sendVerify()" disabled>
+                    </div>
+                    <p class="alert verify-alert clear" id="verify-success">
+                        <strong>인증번호</strong>가 일치합니다.
+                    </p>
+                    <p class="alert verify-alert fail" id="verify-fail">
+                        <strong>인증번호</strong>가 불일치합니다.
+                    </p>
+                    <p class="alert verify-alert fail" id="verify-wrongtype">
+                        <strong>인증번호</strong>는 6자리입니다.
+                    </p>
+                    <div class="box">
+                        <div class="wrapper">
+                            <label for="nickname" class="label">Nickname</label>
+                            <input type="text" id="nickname" name="nickname" class="input" autoComplete="off">
+                        </div>
+                    </div>
+                    <p class="alert nickname-alert clear" id="nickname-available">
+                        사용 가능한 <strong>닉네임</strong>입니다.
+                    </p>
+                    <p class="alert nickname-alert fail" id="nickname-used">
+                        이미 사용중인 <strong>닉네임</strong>입니다.
+                    </p>
+                    <p class="alert nickname-alert fail" id="nickname-wrongtype">
+                        <strong>닉네임</strong> 형식이 올바르지 않습니다.
+                    </p>
+                    <div class="wrapper">
+                        <label for="pwd" class="label">Password</label>
+                        <input type="password" id="pwd" name="pwd" class="input" autoComplete="off">
+                        <i class="bi bi-eye-slash" id="pwd-toggle"></i>
+                        <p id="capslock-alert">
+                            <strong>CapsLock</strong>이 켜져있습니다.
+                        </p>
+                    </div>
+                    <p class="alert pwd-alert clear" id="pwd-success">
+                        사용 가능한 <strong>비밀번호</strong>입니다.
+                    </p>
+                    <p class="alert pwd-alert fail" id="pwd-fail">
+                        <strong>비밀번호</strong>는 6~12자 / 영대소문자 / 숫자
+                    </p>
+                    
+                    <div class="buttons">
+                        <button type="button" id="sign-up" class="sign-up" onclick="send(this.form)">회원가입</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/signup-form.js"></script>
+</body>
+</html>
