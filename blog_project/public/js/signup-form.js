@@ -1,11 +1,3 @@
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const passwordRegex =
-    /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,12}$/;
-const nicknameRegex = /^(?=.*[a-z가-힣])[a-z가-힣0-9]{2,10}$/;
-let emailCheck = false;
-let emailVerify = false;
-let nicknameCheck = false;
-
 // input 태그 focus blur 이벤트 설정
 $(".input").on("focus", function () {
     $(this).parent().addClass("label-up");
@@ -17,44 +9,51 @@ $(".input").on("blur", function () {
     }
 });
 
-// 엔터키로 로그인 실행
-$("#login-form").keypress(function (e) {
-    if (e.keyCode === 13) $("#sign-up").click();
-});
-
 // Email 유효성 검사
-$("#email").on("input", function () {
-    $(".email-alert").removeClass("show");
-    $(".verify").attr("disabled", true);
-    $("#verifyNum").val("");
-    $("#verifyNum").parent().removeClass("label-up");
-    $(".verify-alert").removeClass("show");
-    emailVerify = false;
-    emailCheck = false;
+function emailChecking() {
     let email = $("#email").val();
     let data = { email };
-    if (email != "") {
-        if (emailRegex.test(email)) {
-            $("#email-wrongtype").removeClass("show");
-            fetch("/emailCheck", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            })
-                .then((rs) => rs.text())
-                .then((text) => {
-                    if (text == "available") {
-                        emailCheck = true;
-                        $("#email-available").addClass("show");
-                        $(".verify").attr("disabled", false);
-                    } else {
-                        $("#email-used").addClass("show");
-                    }
-                });
-        } else {
-            $("#email-wrongtype").addClass("show");
-        }
+
+    $(".email-alert").addClass("show").css("color", "red");
+
+    if (email == "") {
+        $(".email-alert").html("<strong>이메일</strong>을 입력해주세요.");
+        $("#email").focus();
+    } else {
+        fetch("/emailCheck", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((rs) => rs.text())
+            .then((text) => {
+                if (text == "available") {
+                    $(".email-alert")
+                        .html("사용 가능한 <strong>이메일</strong>입니다.")
+                        .css("color", "blue");
+                    $("#verifyBtn").attr("disabled", false);
+                } else if (text == "used") {
+                    $(".email-alert").html(
+                        "이미 가입된 <strong>이메일</strong>입니다."
+                    );
+                    $("#email").focus();
+                } else {
+                    $(".email-alert").html(
+                        "<strong>이메일</strong> 형식이 올바르지 않습니다."
+                    );
+                    $("#email").focus();
+                }
+            });
     }
+}
+
+$("#email").change(function () {
+    $(".verify").attr("disabled", true);
+    $("#verifyNum").val("").parent().removeClass("label-up");
+    $(".verify-alert").removeClass("show");
+    $("#verifyBtn").html("인증번호<br>발송");
+    $(".email-alert").removeClass("show");
+    fetch("/delEmailSession", { method: "post" });
 });
 
 // 이메일 인증번호 발송
@@ -62,29 +61,38 @@ function sendVerify() {
     let email = $("#email").val();
     let data = { email };
 
-    if (emailCheck) {
-        fetch("/emailVerify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        })
-            .then((rs) => rs.json())
-            .then((rs) => {
-                if (rs.message == "success") {
-                    alert("인증번호를 발송하였습니다.");
-                } else {
-                    alert("인증번호 발송을 실패했습니다.");
-                }
-            });
-    }
+    fetch("/emailVerify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    })
+        .then((rs) => rs.text())
+        .then((text) => {
+            if (text == "success") {
+                alert("인증번호를 발송하였습니다.");
+                $("#verifyNum")
+                    .attr("disabled", false)
+                    .attr("readonly", false)
+                    .val("")
+                    .focus();
+            } else if (text == "fail") {
+                alert("인증번호 발송을 실패했습니다.");
+            } else {
+                alert("이메일 중복이 확인되지 않았습니다.");
+                $('#email').focus();
+            }
+        });
+
+    $("#verifyBtn").html("인증번호<br>재발송");
 }
 
 // 인증번호 유효성 검사
 $("#verifyNum").on("input", function () {
-    $(".verify-alert").removeClass("show");
-    emailVerify = false;
     let number = $("#verifyNum").val();
     let data = { number };
+
+    $(".verify-alert").addClass("show").css("color", "red");
+
     if (number != "") {
         if (number.length == 6) {
             fetch("/verifyNumCheck", {
@@ -95,59 +103,99 @@ $("#verifyNum").on("input", function () {
                 .then((rs) => rs.text())
                 .then((text) => {
                     if (text == "success") {
-                        emailVerify = true;
-                        $("#verify-success").addClass("show");
+                        $(".verify-alert")
+                            .html("<strong>인증번호</strong>가 일치합니다.")
+                            .css("color", "blue");
+                        $("#verifyNum").attr("readonly", true).blur();
                     } else {
-                        $("#verify-fail").addClass("show");
+                        $(".verify-alert").html(
+                            "<strong>인증번호</strong>가 불일치합니다."
+                        );
                     }
                 });
         } else {
-            $("#verify-wrongtype").addClass("show");
+            $(".verify-alert").html("<strong>인증번호</strong>는 6자리입니다.");
         }
+    } else {
+        $(".verify-alert").removeClass("show");
     }
 });
 
 // 닉네임 유효성 검사
-$("#nickname").on("input", function () {
-    $(".nickname-alert").removeClass("show");
-    nicknameCheck = false;
+function nicknameChecking() {
     let nickname = $("#nickname").val();
     let data = { nickname };
-    if (nickname != "") {
-        if (nicknameRegex.test(nickname)) {
-            $("#nickname-wrongtype").removeClass("show");
-            fetch("/nicknameCheck", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            })
-                .then((rs) => rs.text())
-                .then((text) => {
-                    if (text == "available") {
-                        nicknameCheck = true;
-                        $("#nickname-available").addClass("show");
-                    } else {
-                        $("#nickname-used").addClass("show");
-                    }
-                });
-        } else {
-            $("#nickname-wrongtype").addClass("show");
-        }
+
+    $(".nickname-alert").addClass("show").css("color", "red");
+
+    if (nickname == "") {
+        $(".nickname-alert").html("<strong>닉네임</strong>을 입력해주세요.");
+        $("#nickname").focus();
+        return;
+    } else {
+        fetch("/nicknameCheck", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                Accept: "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((rs) => rs.text())
+            .then((text) => {
+                $(".nickname-alert").css("color", "red");
+                if (text == "available") {
+                    nicknameCheck = true;
+                    $(".nickname-alert")
+                        .html("사용 가능한 <strong>닉네임</strong>입니다.")
+                        .css("color", "blue");
+                } else if (text == "used") {
+                    $(".nickname-alert").html(
+                        "이미 사용중인 <strong>닉네임</strong>입니다."
+                    );
+                    $("#nickname").focus();
+                } else {
+                    $(".nickname-alert").html(
+                        "<strong>닉네임</strong> 형식이 올바르지 않습니다."
+                    );
+                    $("#nickname").focus();
+                }
+            });
     }
+}
+
+$("#nickname").change(function () {
+    fetch('/delNicknameCheck', {method : 'post'})
+    $(".nickname-alert").removeClass("show");
 });
 
 // 비밀번호 유효성 검사
-$("#pwd").on("input", function () {
-    $(".pwd-alert").removeClass("show");
-    pwdCheck = false;
+$("#pwd").change(function () {
     let pwd = $("#pwd").val();
-    if (pwd != "") {
-        if (passwordRegex.test(pwd)) {
-            pwdCheck = true;
-            $("#pwd-success").addClass("show");
-        }else{
-            $("#pwd-fail").addClass("show");
-        }
+    let data = { pwd };
+
+    $(".pwd-alert").addClass("show").css("color", "red");
+
+    if (pwd == "") {
+        $(".pwd-alert").removeClass("show");
+    } else {
+        fetch("/pwdCheck", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        })
+            .then((rs) => rs.text())
+            .then((text) => {
+                if (text == "available") {
+                    $(".pwd-alert")
+                        .html("사용 가능한 <strong>비밀번호</strong>입니다.")
+                        .css("color", "blue");
+                } else {
+                    $(".pwd-alert").html(
+                        "6~12자 / 영대소문자, 숫자, 특문 포함"
+                    );
+                }
+            });
     }
 });
 
@@ -166,8 +214,10 @@ $("#pwd-toggle").on("click", function () {
 $("#pwd").on("keydown keyup", function (e) {
     if (e.originalEvent.getModifierState("CapsLock")) {
         $("#capslock-alert").addClass("show");
+        $(".pwd-alert").css("margin-top", "15px");
     } else {
         $("#capslock-alert").removeClass("show");
+        $(".pwd-alert").css("margin-top", "0px");
     }
 });
 
@@ -184,26 +234,33 @@ function send(f) {
 
     $(".error").removeClass("show");
 
-    if (!emailCheck) {
-        alert('올바르지 않은 이메일입니다.')
-        $("#email").focus();
-        return;
-    }
-    if (!emailVerify) {
-        alert('이메일이 인증되지 않았습니다.')
-        $("#verifyNum").focus();
-        return;
-    }
-    if (!nicknameCheck) {
-        alert('올바르지 않은 닉네임입니다.')
-        $("#nickname").focus();
-        return;
-    }
-    if (!pwdCheck) {
-        alert('올바르지 않은 비밀번호입니다.')
-        $("#pwd").focus();
-        return;
-    }
-
-    f.submit();
+    let body = new URLSearchParams(new FormData(f));
+    fetch("/signup", { method: "post", body })
+        .then((rs) => rs.text())
+        .then((text) => {
+            switch (text) {
+                case "success":
+                    alert("회원가입에 성공했습니다.");
+                    location.href = "/login";
+                    break;
+                case "email-fail":
+                    alert("이메일 중복이 확인되지 않았습니다.");
+                    $("#email").focus();
+                    break;
+                case "verify-fail":
+                    alert("이메일이 인증되지 않았습니다.");
+                    break;
+                case "nickname-fail":
+                    alert("닉네임 중복이 확인되지 않았습니다.");
+                    $("#nickname").focus();
+                    break;
+                case "pwd-fail":
+                    alert("비밀번호가 올바르지 않습니다.");
+                    $("#pwd").focus();
+                    break;
+                default:
+                    alert("오류가 발생했습니다.");
+                    break;
+            }
+        });
 }

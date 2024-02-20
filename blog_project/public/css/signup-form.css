@@ -17,22 +17,27 @@ a{text-decoration: none;}
 
         /* wrapper */
         .container .main .input-form .box{width: 100%; display: flex; flex-flow: row; justify-content: space-between; gap:10px}
-        .container .main .input-form .wrapper{width: 100%; padding:10px 15px; border:1px solid lightgray; position: relative; border-radius: 5px; display: flex;}
+        .container .main .input-form .wrapper{width: 80%; padding:10px 15px; border:1px solid lightgray; position: relative; border-radius: 5px; display: flex;}
+        .container .main .input-form .pwd-wrapper{width: 100%;}
         .container .main .input-form .wrapper:focus-within{border:1px solid #006938;}
-        .container .main .input-form .wrapper .label{position: absolute; font-size: 18px; color: lightgray; top: 10px; left: 15px; transition: all .1s;}
+        .container .main .input-form .wrapper .label{position: absolute; font-size: 18px; color: lightgray; top: 10px; left: 15px; transition: all .1s; cursor: pointer;}
         .container .main .input-form .wrapper.label-up .label{top:-10.5px; left: 9px; font-size: 14px; background-color: white; padding:0 3px; color: gray;}
         .container .main .input-form .wrapper:focus-within .label{color:#006938;}
         .container .main .input-form .wrapper > input{width: 100%; font-size: 18px; font-family: sans-serif; border:none; outline: none;}
         .container .main .input-form .wrapper #pwd{width: 90%;}
         .container .main .input-form .wrapper > input:focus{color:#006938;}
         .container .main .input-form .wrapper #pwd-toggle{position: absolute; top: 7px; right: 10px; font-size: 25px; color: gray; cursor: pointer;}
-        .container .main .input-form .wrapper #capslock-alert{position: absolute; bottom: -22px; display: none; font-size: 13px; font-family: 'Pretendard-Regular';}
+        .container .main .input-form .wrapper #capslock-alert{position: absolute; bottom: -18px; display: none; font-size: 13px; font-family: 'Pretendard-Regular';}
         .container .main .input-form .wrapper #capslock-alert.show{display: block;}
+
+        .container .main .input-form .box .btns{font-size: 12px; border: 1px solid lightgray; padding:2px; border-radius: 5px; cursor: pointer; transition: all .1s; background-color: whitesmoke;}
+        .container .main .input-form .box .btns:hover{background-color: lightgray;}
+
+        .container .main .input-form .box .btns[disabled]{cursor: not-allowed;}
+        .container .main .input-form .box .btns[disabled]:hover{background-color: whitesmoke;}
 
         /* alert */
         .container .main .input-form .alert{display:none; font-size: 14px;}
-        .container .main .input-form .alert.clear{color:blue}
-        .container .main .input-form .alert.fail{color:red}
         .container .main .input-form .alert.show{display: block;}
 
         /* buttons */
@@ -44,6 +49,13 @@ a{text-decoration: none;}
 
 @media screen and (max-width:768px){
     .container{width: 100%; min-width: 320px; margin:0 auto;}
-    .container .main{padding:0 24px;}
     .container .header > img{width: 150px;}
 }
+
+@media screen and (max-width:320px){
+    .container .main{padding:0 12px;}
+    .container .main .input-form .wrapper{width: 78%;}
+    .container .main .input-form .pwd-wrapper{width: 100%;}
+}
+
+

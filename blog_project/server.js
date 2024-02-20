@@ -4,6 +4,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local");
 const models = require("./models");
 const nodemailer = require("nodemailer");
+const regex = require("./regex");
 const app = express();
 
 app.set("view engine", "ejs");
@@ -82,10 +83,12 @@ app.listen(8081, () => {
     console.log("server on http://localhost:8081/");
 });
 
+// 메인 페이지
 app.get("/", (req, res) => {
     res.render("index", { user: req.user });
 });
 
+// 로그인 페이지
 app.get("/login", (req, res) => {
     let path = req.query.path || "/";
     if (req.user) {
@@ -96,8 +99,8 @@ app.get("/login", (req, res) => {
     }
 });
 
+// 로그인 검증
 app.post("/login", (req, res) => {
-    // 로그인 검증
     passport.authenticate("local", (error, user, info) => {
         if (error) return res.status(500).json(error);
 
@@ -116,8 +119,8 @@ app.get("/logout", (req, res) => {
     });
 });
 
+// 게시판 조회 페이지
 app.get("/board", async (req, res) => {
-    // 게시판 조회
     let page = req.query.page ? req.query.page : 1;
     let limit = 5;
     let totalPost = await models.board.count();
@@ -142,8 +145,8 @@ app.get("/board", async (req, res) => {
     res.render("board", { user: req.user, boardList, totalPage });
 });
 
+// 게시글 작성 페이지
 app.get("/board/post", (req, res) => {
-    // 게시글 작성 페이지
     if (req.user) {
         res.render("board-insert", { user: req.user });
     } else {
@@ -153,8 +156,8 @@ app.get("/board/post", (req, res) => {
     }
 });
 
+// 게시글 작성
 app.post("/board/post", async (req, res) => {
-    // 글 insert
     await models.board
         .create(req.body)
         .then(() => {
@@ -165,8 +168,8 @@ app.post("/board/post", async (req, res) => {
         });
 });
 
+// 게시글 상세 조회 페이지
 app.get("/board/:id", async (req, res) => {
-    // 글 상세 뷰
     const { id } = req.params;
 
     try {
@@ -185,6 +188,7 @@ app.get("/board/:id", async (req, res) => {
     }
 });
 
+// 게시글 삭제
 app.delete("/board/:id", async (req, res) => {
     const { id } = req.params;
 
@@ -198,6 +202,7 @@ app.delete("/board/:id", async (req, res) => {
         });
 });
 
+// 게시글 수정 페이지
 app.get("/board/:id/update", async (req, res) => {
     const { id } = req.params;
 
@@ -222,6 +227,7 @@ app.get("/board/:id/update", async (req, res) => {
     res.render("board-update", { data: postData, user: req.user });
 });
 
+// 게시글 수정
 app.put("/board/:id", async (req, res) => {
     const { id } = req.params;
 
@@ -235,23 +241,48 @@ app.put("/board/:id", async (req, res) => {
         });
 });
 
+// 로그인 페이지
 app.get("/signup", (req, res) => {
     res.render("signup-form");
 });
 
+// 이메일 유효성 검사
 app.post("/emailCheck", async (req, res) => {
     let { email } = req.body;
     let result = await models.member.findOne({ where: { email } });
-    if (result) {
+    if (!regex.emailRegex.test(email)) {
+        return res.send("fail");
+    } else if (result) {
         return res.send("used");
     } else {
+        req.session.emailCheck = true;
+        console.log("emailCheck 세션 등록");
         return res.send("available");
     }
 });
 
+// 이메일 input 값 변경시 세션 삭제
+app.post("/delEmailSession", (req, res) => {
+    if (req.session.emailCheck) {
+        delete req.session.emailCheck;
+        console.log("emailCheck 세션 삭제 완료");
+    }
+    if (req.session.emailVerify) {
+        delete req.session.emailVerify;
+        console.log("emailVerify 세션 삭제 완료");
+    }
+    return res.status(200).redirect("/");
+});
+
+// 이메일 인증번호 발송
 app.post("/emailVerify", async (req, res) => {
+    if (req.session.emailVerify) {
+        delete req.session.emailVerify;
+        console.log("emailVerify 세션 삭제");
+    }
     const number = Math.floor(100000 + Math.random() * 900000);
     req.session.verifyNum = number;
+    console.log("인증번호 : " + number);
 
     const { email } = req.body; //사용자가 입력한 이메일
 
@@ -265,49 +296,84 @@ app.post("/emailVerify", async (req, res) => {
         console.log("response", response);
         //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
         if (err) {
-            res.json({ message: "fail" });
+            return res.send("fail");
             smtpTransport.close(); //전송종료
-            return;
         } else {
-            res.json({ message: "success" });
+            return res.send("success");
             smtpTransport.close(); //전송종료
-            return;
         }
     });
 });
 
+// 인증번호 체크
 app.post("/verifyNumCheck", (req, res) => {
     const { number } = req.body;
     const verifyNum = req.session.verifyNum;
-    console.log("verifyNum : " + verifyNum);
-    console.log("number : " + number);
+    console.log("입력 인증번호 : " + number);
+
+    if (!req.session.emailCheck) return res.send("emailCheck-fail");
     if (number == verifyNum) {
+        req.session.emailVerify = true;
+        console.log("emailVerify 세션 등록");
         return res.send("success");
     } else {
         return res.send("fail");
     }
 });
 
+// 닉네임 유효성 검사
 app.post("/nicknameCheck", async (req, res) => {
     const { nickname } = req.body;
     let result = await models.member.findOne({ where: { nickname } });
-    if (result) {
+    if (!regex.nicknameRegex.test(nickname)) {
+        return res.send("fail");
+    } else if (result) {
         return res.send("used");
     } else {
+        req.session.nicknameCheck = true;
+        console.log("nicknameCheck 세션 등록");
         return res.send("available");
     }
 });
 
-app.post('/signup', async (req, res)=>{
+// 닉네임 input 값 변경시 세션 삭제
+app.post("/delNicknameCheck", (req, res) => {
+    if (req.session.nicknameCheck) {
+        delete req.session.nicknameCheck;
+        console.log("nicknameCheck 세션 삭제");
+    }
+    return res.status(200).redirect("/");
+});
+
+// 비밀번호 유효성 검사
+app.post("/pwdCheck", (req, res) => {
+    if (req.session.pwdCheck) {
+        delete req.session.pwdCheck;
+        console.log("pwdCheck 세션 삭제");
+    }
+    let { pwd } = req.body;
+    if (!regex.pwdRegex.test(pwd)) {
+        return res.send("fail");
+    } else {
+        req.session.pwdCheck = true;
+        console.log("pwdCheck 세션 등록");
+        return res.send("available");
+    }
+});
+
+// 회원가입 insert
+app.post("/signup", async (req, res) => {
+    if (!req.session.emailCheck) return res.send("email-fail");
+    if (!req.session.emailVerify) return res.send("verify-fail");
+    if (!req.session.nicknameCheck) return res.send("nickname-fail");
+    if (!req.session.pwdCheck) return res.send("pwd-fail");
+
     await models.member
         .create(req.body)
         .then(() => {
-            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-            res.write("<script>alert('성공적으로 회원가입이 되었습니다.')</script>");
-            res.write("<script>location.href='/login'</script>");
-            return;
+            res.status(200).send("success");
         })
         .catch((error) => {
             res.status(500).send(error);
         });
-})
+});

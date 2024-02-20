@@ -23,62 +23,42 @@
                             <label for="email" class="label">Email</label>
                             <input type="text" id="email" name="email" class="input" autoComplete="off">
                         </div>
+                        <button type="button" class="emailCheck btns" onclick="emailChecking()">중복확인</button>
                     </div>
-                    <p class="alert email-alert clear" id="email-available">
-                        사용 가능한 <strong>이메일</strong>입니다.
-                    </p>
-                    <p class="alert email-alert fail" id="email-used">
-                        이미 가입된 <strong>이메일</strong>입니다.
-                    </p>
-                    <p class="alert email-alert fail" id="email-wrongtype">
-                        <strong>이메일</strong> 형식이 올바르지 않습니다.
-                    </p>
+                    <div class="alert email-alert"></div>
+
                     <div class="box verifyBox">
                         <div class="wrapper">
                             <label for="verifyNum" class="label">Verify</label>
                             <input type="text" id="verifyNum" name="verifyNum" class="input verify" autoComplete="off" disabled>
                         </div>
-                        <input type="button" class="verify" value="인증" onclick="sendVerify()" disabled>
+                        <button type="button" id="verifyBtn" class="verify btns" onclick="sendVerify()" disabled>
+                            인증번호<br>발송
+                        </button>
                     </div>
-                    <p class="alert verify-alert clear" id="verify-success">
-                        <strong>인증번호</strong>가 일치합니다.
-                    </p>
-                    <p class="alert verify-alert fail" id="verify-fail">
-                        <strong>인증번호</strong>가 불일치합니다.
-                    </p>
-                    <p class="alert verify-alert fail" id="verify-wrongtype">
-                        <strong>인증번호</strong>는 6자리입니다.
-                    </p>
+                    <div class="alert verify-alert"></div>
+
                     <div class="box">
                         <div class="wrapper">
                             <label for="nickname" class="label">Nickname</label>
                             <input type="text" id="nickname" name="nickname" class="input" autoComplete="off">
                         </div>
+                        <button type="button" class="nicknameCheck btns" onclick="nicknameChecking()">중복확인</button>
                     </div>
-                    <p class="alert nickname-alert clear" id="nickname-available">
-                        사용 가능한 <strong>닉네임</strong>입니다.
-                    </p>
-                    <p class="alert nickname-alert fail" id="nickname-used">
-                        이미 사용중인 <strong>닉네임</strong>입니다.
-                    </p>
-                    <p class="alert nickname-alert fail" id="nickname-wrongtype">
-                        <strong>닉네임</strong> 형식이 올바르지 않습니다.
-                    </p>
-                    <div class="wrapper">
-                        <label for="pwd" class="label">Password</label>
-                        <input type="password" id="pwd" name="pwd" class="input" autoComplete="off">
-                        <i class="bi bi-eye-slash" id="pwd-toggle"></i>
-                        <p id="capslock-alert">
-                            <strong>CapsLock</strong>이 켜져있습니다.
-                        </p>
-                    </div>
-                    <p class="alert pwd-alert clear" id="pwd-success">
-                        사용 가능한 <strong>비밀번호</strong>입니다.
-                    </p>
-                    <p class="alert pwd-alert fail" id="pwd-fail">
-                        <strong>비밀번호</strong>는 6~12자 / 영대소문자 / 숫자
-                    </p>
+                    <div class="alert nickname-alert"></div>
                     
+                    <div class="box">
+                        <div class="wrapper pwd-wrapper">
+                            <label for="pwd" class="label">Password</label>
+                            <input type="password" id="pwd" name="pwd" class="input" autoComplete="off">
+                            <i class="bi bi-eye-slash" id="pwd-toggle"></i>
+                            <p id="capslock-alert">
+                                <strong>CapsLock</strong>이 켜져있습니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="alert pwd-alert"></div>
+
                     <div class="buttons">
                         <button type="button" id="sign-up" class="sign-up" onclick="send(this.form)">회원가입</button>
                     </div>

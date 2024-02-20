@@ -44,10 +44,7 @@ function send(f) {
     let email = f.email.value;
     let pwd = f.pwd.value;
     let path = f.path.value;
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const passwordPattern =
-        /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{6,12}$/;
-
+    
     $(".error").removeClass("show");
 
     if(email != 'root' && email != 'user'){
@@ -64,16 +61,6 @@ function send(f) {
         if (pwd == "") {
             $("#pwd-empty").addClass("show");
             $("#pwd").focus();
-            return;
-        }
-        if (email.length < 4) {
-            $("#email-wrong-type").addClass("show");
-            $("#email").focus();
-            return;
-        }
-        if(!passwordPattern.test(pwd)){
-            $('#pwd-wrong-type').addClass('show');
-            $('#pwd').focus();
             return;
         }
     }else{
