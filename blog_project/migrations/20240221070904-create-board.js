@@ -9,10 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      writer: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
+      // writer: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER
+      // },
       title: {
         allowNull: false,
         type: Sequelize.STRING
@@ -23,7 +23,8 @@ module.exports = {
       },
       readhit: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue : 0
       },
       createdAt: {
         allowNull: false,

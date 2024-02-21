@@ -140,17 +140,14 @@ app.get("/board", async (req, res) => {
         offset = 0;
     }
     const boardList = await models.board.findAll({
-        include: [
-            {
-                model: models.member,
-                attributes: ["nickname"],
-            },
-        ],
+        include: [{
+            model: models.member,
+            attributes : ['nickname']
+        }],
         order: [["id", "DESC"]],
-        // offset,
-        // limit,
+        offset,
+        limit,
     });
-    console.log(boardList)
     res.render("board", { user: req.user, boardList, totalPage });
 });
 

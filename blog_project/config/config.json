@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "1111",
-    "database": "test",
-    "host": "40.82.156.164",
+    "password": "yjh40523263!@",
+    "database": "minipj",
+    "host": "43.202.144.203",
     "dialect": "mysql"
   },
   "test": {
