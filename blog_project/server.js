@@ -22,6 +22,7 @@ app.use(
 );
 app.use(passport.session());
 
+// passport 설정
 passport.use(
     new localStrategy(
         {
@@ -62,6 +63,7 @@ passport.deserializeUser(async (user, done) => {
     }
 });
 
+// nodemailer 설정
 const smtpTransPort = nodemailer.createTransport({
     pool: true,
     maxConnections: 1,
@@ -72,7 +74,7 @@ const smtpTransPort = nodemailer.createTransport({
     requireTLS: true,
     auth: {
         user: "wjdgus3044@naver.com",
-        pass: "yjh40523263!@",
+        pass: "",
     },
     tls: {
         rejectUnauthorized: false,
@@ -113,13 +115,14 @@ app.post("/login", (req, res) => {
     })(req, res);
 });
 
+// 로그아웃
 app.get("/logout", (req, res) => {
     req.logout(() => {
         res.redirect("/login");
     });
 });
 
-// 게시판 조회 페이지
+// 게시판 페이지
 app.get("/board", async (req, res) => {
     let page = req.query.page ? req.query.page : 1;
     let limit = 5;
@@ -131,6 +134,11 @@ app.get("/board", async (req, res) => {
 
     let offset = (page - 1) * limit;
 
+    let count = await models.board.count();
+
+    if (count == 0) {
+        offset = 0;
+    }
     const boardList = await models.board.findAll({
         include: [
             {
@@ -139,9 +147,10 @@ app.get("/board", async (req, res) => {
             },
         ],
         order: [["id", "DESC"]],
-        offset,
-        limit,
+        // offset,
+        // limit,
     });
+    console.log(boardList)
     res.render("board", { user: req.user, boardList, totalPage });
 });
 
@@ -168,7 +177,7 @@ app.post("/board/post", async (req, res) => {
         });
 });
 
-// 게시글 상세 조회 페이지
+// 게시글 상세 페이지
 app.get("/board/:id", async (req, res) => {
     const { id } = req.params;
 
@@ -182,6 +191,7 @@ app.get("/board/:id", async (req, res) => {
             ],
             where: { id: id },
         });
+        console.log(data.member)
         res.render("board-view", { data, user: req.user });
     } catch {
         res.status(500).send("error");
@@ -261,7 +271,7 @@ app.post("/emailCheck", async (req, res) => {
     }
 });
 
-// 이메일 input 값 변경시 세션 삭제
+// 이메일 값 변경시 세션 삭제
 app.post("/delEmailSession", (req, res) => {
     if (req.session.emailCheck) {
         delete req.session.emailCheck;
@@ -285,27 +295,27 @@ app.post("/emailVerify", async (req, res) => {
     console.log("인증번호 : " + number);
 
     const { email } = req.body; //사용자가 입력한 이메일
-
-    const mailOptions = {
-        from: "wjdgus3044@naver.com", // 발신자 이메일 주소.
-        to: email, //사용자가 입력한 이메일 -> 목적지 주소 이메일
-        subject: " 인증 관련 메일 입니다. ",
-        html: "<h1>인증번호를 입력해주세요 \n\n\n\n\n\n</h1>" + number,
-    };
-    smtpTransPort.sendMail(mailOptions, (err, response) => {
-        console.log("response", response);
-        //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
-        if (err) {
-            return res.send("fail");
-            smtpTransport.close(); //전송종료
-        } else {
-            return res.send("success");
-            smtpTransport.close(); //전송종료
-        }
-    });
+    return res.send("success");
+    // const mailOptions = {
+    //     from: "wjdgus3044@naver.com", // 발신자 이메일 주소.
+    //     to: email, //사용자가 입력한 이메일 -> 목적지 주소 이메일
+    //     subject: " 인증 관련 메일 입니다. ",
+    //     html: "<h1>인증번호를 입력해주세요 \n\n\n\n\n\n</h1>" + number,
+    // };
+    // smtpTransPort.sendMail(mailOptions, (err, response) => {
+    //     console.log("response", response);
+    //     //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
+    //     if (err) {
+    //         return res.send("fail");
+    //         smtpTransport.close(); //전송종료
+    //     } else {
+    //         return res.send("success");
+    //         smtpTransport.close(); //전송종료
+    //     }
+    // });
 });
 
-// 인증번호 체크
+// 인증번호 검사
 app.post("/verifyNumCheck", (req, res) => {
     const { number } = req.body;
     const verifyNum = req.session.verifyNum;
@@ -336,7 +346,7 @@ app.post("/nicknameCheck", async (req, res) => {
     }
 });
 
-// 닉네임 input 값 변경시 세션 삭제
+// 닉네임 값 변경시 세션 삭제
 app.post("/delNicknameCheck", (req, res) => {
     if (req.session.nicknameCheck) {
         delete req.session.nicknameCheck;
@@ -361,7 +371,7 @@ app.post("/pwdCheck", (req, res) => {
     }
 });
 
-// 회원가입 insert
+// DB에 회원 추가
 app.post("/signup", async (req, res) => {
     if (!req.session.emailCheck) return res.send("email-fail");
     if (!req.session.emailVerify) return res.send("verify-fail");
@@ -376,4 +386,31 @@ app.post("/signup", async (req, res) => {
         .catch((error) => {
             res.status(500).send(error);
         });
+});
+
+// 마이페이지
+app.get("/member/:id", async (req, res) => {
+    let { id } = req.params;
+    let userData = await models.member.findOne({ where: { id } });
+    let postData = await models.board.findAll({
+        where: { writer: id },
+        limit: 10,
+    });
+    res.render("mypage", { userData, postData, user: req.user });
+});
+
+// 회원정보 수정 페이지
+app.get("/member/:id/update", async (req, res) => {
+    let { id } = req.params;
+
+    if (!req.isAuthenticated() || req.user.id != id) {
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.write("<script>alert('접근 권한이 없습니다.')</script>");
+        res.write("<script>location.href='/'</script>");
+        return;
+    }
+
+    let userData = await models.member.findByPk(id);
+
+    res.render("member-update", { userData, user: req.user });
 });

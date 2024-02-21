@@ -11,24 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      board.belongsTo(models.member, {foreignKey: 'id'})
     }
   }
   board.init({
+    id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     writer: DataTypes.INTEGER,
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    readhit: DataTypes.INTEGER,
-    is_deleted: DataTypes.INTEGER
+    readhit: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'board',
   });
-
-  board.associate = function(models){
-    board.belongsTo(models.member, {
-      foreignKey: 'writer'
-    })
-  }
-
   return board;
 };

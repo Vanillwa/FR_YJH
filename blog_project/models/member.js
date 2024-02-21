@@ -11,9 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      member.hasMany(models.board, { foreignKey: "writer" });
     }
   }
   member.init({
+    id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
     email: DataTypes.STRING,
     pwd: DataTypes.STRING,
     nickname: DataTypes.STRING
@@ -21,10 +26,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'member',
   });
-
-  member.associate = function(models){
-    member.hasMany(models.board, {foreignKey : 'writer'})
-  }
-
   return member;
 };

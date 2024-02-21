@@ -29,7 +29,7 @@
                     <tr>
                         <td><%= i.id %></td>
                         <td class="title"><a href="/board/<%= i.id %>"><%= i.title %></a></td>
-                        <td><%= i.member.nickname %></td>
+                        <td><a href="/member/<%= i.id %>"><%= i.member %></a></td>
                         <td><%= i.readhit %></td>
                         <td><%= i.createdAt.toLocaleDateString() %></td>
                     </tr>

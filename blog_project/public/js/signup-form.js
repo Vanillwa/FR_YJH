@@ -192,7 +192,7 @@ $("#pwd").change(function () {
                         .css("color", "blue");
                 } else {
                     $(".pwd-alert").html(
-                        "6~12자 / 영대소문자, 숫자, 특문 포함"
+                        "6~15자 / 영대소문자, 숫자, 특문 포함"
                     );
                 }
             });

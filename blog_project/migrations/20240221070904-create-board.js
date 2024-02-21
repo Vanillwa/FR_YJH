@@ -10,21 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       writer: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       readhit: {
-        type: Sequelize.INTEGER,
-        defaultValue : 0
-      },
-      is_deleted: {
-        type: Sequelize.INTEGER,
-        defaultValue : 0
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
