@@ -15,11 +15,11 @@
         <div class="container">
             <h2 class="title"><%= userData.nickname %>님의 마이페이지</h2>
             <button type="button" onclick="location.href='/member/<%= userData.id%>/update'">회원정보 수정</button>
-            <h3>최근 작성글</h3>
-            <table>
+            <h3 class="subtitle">최근 작성글</h3>
+            <table class="recent-post">
                 <% for(let i of postData){ %>
                     <tr>
-                        <td><%= i.title %></td>
+                        <td class="post-title"><a href="/board/<%= i.id %>"><%= i.title %></a></td>
                         <td><%= i.createdAt.toLocaleDateString() %></td>
                     </tr>
                 <% } %>

@@ -25,16 +25,23 @@
                     <th class="readhit">조회수</th>
                     <th class="createdAt">작성일</th>
                 </tr>
-                <% for(i of boardList){ %>
+                <% if(boardList.length > 0){ %>
+                    <% for(i of boardList){ %>
+                        <tr>
+                            <td><%= i.id %></td>
+                            <td class="title"><a href="/board/<%= i.id %>"><%= i.title %></a></td>
+                            <td><a href="/member/<%= i.writer %>"><%= i.member.nickname %></a></td>
+                            <td><%= i.readhit %></td>
+                            <td><%= i.createdAt.toLocaleDateString() %></td>
+                        </tr>
+                    <% } %>
+                <% } else { %>
                     <tr>
-                        <td><%= i.id %></td>
-                        <td class="title"><a href="/board/<%= i.id %>"><%= i.title %></a></td>
-                        <td><a href="/member/<%= i.id %>"><%= i.member.nickname %></a></td>
-                        <td><%= i.readhit %></td>
-                        <td><%= i.createdAt.toLocaleDateString() %></td>
+                        <td colspan="5">등록된 게시글이 없습니다.</td>
                     </tr>
                 <% } %>
             </table>
+                
             <div class="paging">
                 <% for(let i=1; i <= totalPage; i++){ %>
                     <a href="/board?page=<%= i %>"><%= i %></a>

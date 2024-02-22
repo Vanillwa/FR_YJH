@@ -140,10 +140,12 @@ app.get("/board", async (req, res) => {
         offset = 0;
     }
     const boardList = await models.board.findAll({
-        include: [{
-            model: models.member,
-            attributes : ['nickname']
-        }],
+        include: [
+            {
+                model: models.member,
+                attributes: ["nickname"],
+            },
+        ],
         order: [["id", "DESC"]],
         offset,
         limit,
@@ -188,7 +190,6 @@ app.get("/board/:id", async (req, res) => {
             ],
             where: { id: id },
         });
-        console.log(data.member)
         res.render("board-view", { data, user: req.user });
     } catch {
         res.status(500).send("error");
@@ -292,24 +293,24 @@ app.post("/emailVerify", async (req, res) => {
     console.log("인증번호 : " + number);
 
     const { email } = req.body; //사용자가 입력한 이메일
-    return res.send("success");
-    // const mailOptions = {
-    //     from: "wjdgus3044@naver.com", // 발신자 이메일 주소.
-    //     to: email, //사용자가 입력한 이메일 -> 목적지 주소 이메일
-    //     subject: " 인증 관련 메일 입니다. ",
-    //     html: "<h1>인증번호를 입력해주세요 \n\n\n\n\n\n</h1>" + number,
-    // };
-    // smtpTransPort.sendMail(mailOptions, (err, response) => {
-    //     console.log("response", response);
-    //     //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
-    //     if (err) {
-    //         return res.send("fail");
-    //         smtpTransport.close(); //전송종료
-    //     } else {
-    //         return res.send("success");
-    //         smtpTransport.close(); //전송종료
-    //     }
-    // });
+    // return res.send("success");
+    const mailOptions = {
+        from: "wjdgus3044@naver.com", // 발신자 이메일 주소.
+        to: email, //사용자가 입력한 이메일 -> 목적지 주소 이메일
+        subject: " 인증 관련 메일 입니다. ",
+        html: "<h1>인증번호를 입력해주세요 \n\n\n\n\n\n</h1>" + number,
+    };
+    smtpTransPort.sendMail(mailOptions, (err, response) => {
+        console.log("response", response);
+        //첫번째 인자는 위에서 설정한 mailOption을 넣어주고 두번째 인자로는 콜백함수.
+        if (err) {
+            return res.send("fail");
+            smtpTransport.close(); //전송종료
+        } else {
+            return res.send("success");
+            smtpTransport.close(); //전송종료
+        }
+    });
 });
 
 // 인증번호 검사
@@ -411,3 +412,19 @@ app.get("/member/:id/update", async (req, res) => {
 
     res.render("member-update", { userData, user: req.user });
 });
+
+// 정보수정 닉네임 유효성 검사 - 미완성
+// app.post("/updateNicknameCheck", async (req, res)=>{
+//     const { nickname } = req.body;
+//     let result = await models.member.findOne({ where: { nickname } });
+//     if (!regex.nicknameRegex.test(nickname)) {
+//         return res.send("fail");
+//     } else if (result) {
+        
+//         req.session.nicknameCheck = true;
+//         console.log("nicknameCheck 세션 등록");
+//         return res.send("available");
+//     } else {
+//         return res.send("used");
+//     }
+// })
