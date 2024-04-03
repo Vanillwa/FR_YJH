@@ -1,0 +1,8 @@
+*{margin: 0; padding: 0; box-sizing: border-box;}
+ol,ul,li{list-style: none;}
+a{text-decoration: none;}
+
+.gnb{padding: 24px; display:flex; gap:24px; background-color: #444;}
+.gnb li > a{color:white;}
+
+section{padding: 24px 0 0;}

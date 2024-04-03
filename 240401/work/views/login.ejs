@@ -1,0 +1,36 @@
+<html>
+<form onsubmit="handleSubmit(event, this)">
+  <div>
+    <label for="username">username : </label>
+    <input type="text" name="username" id="username" required />
+  </div>
+  <div>
+    <label for="password">password : </label>
+    <input type="password" name="password" id="password" autocomplete="none" required/>
+  </div>
+  <button type="submit">로그인</button>
+</form>
+<script>
+  const handleSubmit = (e, f) => {
+    e.preventDefault()
+    let body = {
+      username: f.username.value,
+      password: f.password.value
+    }
+    console.log(body)
+    fetch('/login', { method: 'post', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } })
+      .then(res => res.text())
+      .then(text => {
+        console.log(text)
+        if (text === 'success') {
+          alert('로그인 성공')
+          location.href = '/'
+        } else if (text === 'NoExist') {
+          alert('계정이 존재하지 않습니다.')
+        } else if (text === 'PwdFail') {
+          alert('비밀번호가 일치하지 않습니다.')
+        }
+      })
+  }
+</script>
+</html>
