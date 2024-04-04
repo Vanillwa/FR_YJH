@@ -1,0 +1,33 @@
+<html>
+<div class="inner">
+	<h2 class="text-center">Posts list</h2>
+	<div class="d-flex justify-content-end">
+		<button type="button" class="btn btn-secondary" onclick="location.href='/posts/write'">Write</button>
+	</div>
+	<div class="list d-flex flex-column gap-2 pt-2">
+		<% for(item of list){ %>
+			<div class="item d-flex">
+				<h3 class="col-3 text-center"><a href="/posts/<%= item._id %>">
+						<%= item.title %>
+					</a></h3>
+					<p class="col-5 text-center">
+						<%= item.content %>
+					</p>
+					<a class="col-2 text-center" href="/posts/<%= item._id %>/edit">수정하기</a>
+					<button type="button" class="btn btn-secondary col-2" onclick="handleDelete('<%= item._id %>')">삭제하기</button>
+			</div>
+			<% } %>
+	</div>
+</div>
+<script>
+	const handleDelete = (id)=>{
+		if(!confirm('정말 삭제?')) return
+		fetch(`/posts/${id}`, {method:'delete'})
+		.then(res=>res.text())
+		.then(text=>{
+			alert('삭제성공')
+			location.href='/posts'
+		})
+	}
+</script>
+</html>

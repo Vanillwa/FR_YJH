@@ -1,0 +1,24 @@
+<html>
+	<form class="form" onsubmit="handleSubmit(event, this)">
+		<h2>글수정</h2>
+		<input type="text" name="title" value="<%= post.title %>" />
+		<input type="text" name="content" value="<%= post.content %>" />
+		<button type="submit">전송</button>
+	</form>
+	<script>
+		const handleSubmit = (e, f)=>{
+			e.preventDefault()
+			let body = {
+				title : f.title.value,
+				content : f.content.value
+			}
+
+			fetch('/posts/<%= post._id %>', {method : 'put', body : JSON.stringify(body) , headers : {'Content-Type' : 'application/json'}})
+			.then(res => res.text())
+			.then(text =>{
+				alert(text)
+				location.href='/posts'
+			})
+		}
+	</script>
+</html>

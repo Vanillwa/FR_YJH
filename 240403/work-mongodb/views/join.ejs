@@ -1,0 +1,36 @@
+<html>
+	<form onsubmit="handleSubmit(event, this)">
+		<div>
+			<label for="username">username : </label>
+			<input type="text" name="username" id="username" required />
+		</div>
+		<div>
+			<label for="password">password : </label>
+			<input type="password" name="password" id="password" autocomplete="none" required/>
+		</div>
+		<button type="submit">회원가입</button>
+	</form>
+	<script>
+		const handleSubmit = (e, f) => {
+			e.preventDefault()
+			let body = {
+				username: f.username.value,
+				password: f.password.value
+			}
+			console.log(body)
+			fetch('/join', { method: 'post', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } })
+				.then(res => res.text())
+				.then(text => {
+					console.log(text)
+					if (text === 'success') {
+						alert('회원가입 성공')
+						location.href = '/login'
+					} else if (text === 'duplicated') {
+						alert('username 중복')
+					}else{
+						alert('에러 발생')
+					}
+				})
+		}
+	</script>
+</html>

@@ -51,7 +51,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((user, done) => {
   process.nextTick(() => {
-    return done(null, user)
+    return done(null, user) 
   })
 })
 
