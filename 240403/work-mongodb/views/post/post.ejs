@@ -1,0 +1,53 @@
+<html>
+<div class="item">
+	<h3>
+		제목 : <%= result.title %>
+	</h3>
+	<p>
+		내용 : <%= result.content %>
+	</p>
+	<p>작성자 : <%= result.username %> | <a href="/chat/request?targetId=<%= result.userId %>">채팅하기</a></p>
+</div>
+<div class="commentList">
+	<h3>댓글</h3>
+	<% if(comments.length == 0){ %>
+		<div>작성된 댓글이 없습니다.</div>
+	<% } %>
+	<% if(comments.length > 0 ){ %>
+		<% for(comment of comments){ %>
+			<div>
+				<span>작성자 : <%= comment.username %> |</span>
+				<span>내용 : <%= comment.content %></span>
+			</div>
+		<% } %>
+	<% } %>
+</div>
+<div class="comment">
+	<h3>댓글 작성</h3>
+	<% if(user){ %>
+	<form onsubmit="handleCommentSubmit(event, this)">
+		<div><%= user.username %></div>
+		<input type="text" name="content" />
+		<button type="submit">댓글작성</button>
+		<input type="hidden" name="postId" value="<%= result._id %>"/>
+	</form>
+	<% } %>
+	<% if(!user){ %>
+		<div><a href="/login">로그인</a> 후 댓글 작성 가능</div>
+	<% } %>
+</div>
+<script>
+	const handleCommentSubmit = (e, f)=>{
+		e.preventDefault()
+
+		let body = {
+			content : f.content.value,
+			postId : f.postId.value,
+		}
+		fetch('/comment', {method : 'post', headers : {'Content-Type' : 'application/json'}, body : JSON.stringify(body)})
+		.then(res=>{
+			location.reload()
+		})
+	}
+</script>
+</html>

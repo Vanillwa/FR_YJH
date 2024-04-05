@@ -1,0 +1,59 @@
+<html>
+<div>
+	채팅 참가자
+</div>
+<div>
+	<% for(member of result.member){ %>
+		<span>
+			<%= member %> /
+		</span>
+		<% } %>
+</div>
+<div id="chat-screen">
+
+</div>
+<form class="chat-form" onsubmit="sendMessage(event, this)">
+	<input type="hidden" name="username" value="<%= user.username %>" />
+	<input type="text" name="message" id="message" oninput="handleOninput()">
+	<button type="button" onclick="sendMessage(event, this.form)" id="sendBtn" disabled>전송</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.5/client-dist/socket.io.min.js"></script>
+<script>
+	const socket = io();
+	socket.emit('ask-join', '<%= result._id %>')
+
+	const handleOninput = () => {
+		if ($('#message').val() != '') {
+			$('#sendBtn').removeAttr('disabled')
+		} else {
+			$('#sendBtn').attr('disabled', 'disabled')
+		}
+	}
+
+	const sendMessage = (e, f) => {
+		e.preventDefault()
+		let data = {
+			message: f.message.value.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;"),
+			username: f.username.value,
+			room: '<%= result._id %>'
+		}
+
+		if (data.message == '') return
+		socket.emit('message-send', data)
+		$('#message').val('')
+		$('#sendBtn').attr('disabled', 'disabled')
+	}
+
+	socket.on('message-broadcast', (data) => {
+		if (data.username == '<%= user.username %>') {
+			$('#chat-screen').append(`<div style="text-align:right; background-color:whitesmoke; padding:12px;">${data.username} : ${data.message}</div>`)
+		} else {
+			$('#chat-screen').append(`<div style="padding:12px;">${data.username} : ${data.message}</div>`)
+		}
+	})
+</script>
+
+</html>

@@ -1,0 +1,57 @@
+<html>
+<div class="inner">
+	<h2 class="text-center">Posts list</h2>
+	<div class="d-flex justify-content-end">
+		<button type="button" class="btn btn-primary" onclick="location.href='/posts/write'">글 작성</button>
+	</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="col-4 text-center">제목</th>
+				<th class="col-4 text-center">내용</th>
+				<th class="col-2 text-center">작성자</th>
+				<th class="col-2 text-center">버튼</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% for(post of list){ %>
+				<tr class="">
+					<td onclick="location.href='/posts/<%= post._id %>'">
+						<%= post.title %>
+					</td>
+					<td class="text-center" onclick="location.href='/posts/<%= post._id %>'">
+						<%= post.content %>
+					</td>
+					<td class="text-center">
+						<%= post.username %>
+					</td>
+
+					<td class="text-center">
+						<% if(user && post.userId == user.id){ %>
+							<button type="button" class="btn btn-secondary btn-sm"
+								onclick="location.href='/posts/<%= post._id %>/edit'">수정</button>
+							<button type="button" class="btn btn-danger btn-sm" onclick="handleDelete('<%= post._id %>')">삭제</button>
+							<% } %>
+					</td>
+				</tr>
+				<% } %>
+		</tbody>
+	</table>
+</div>
+<script>
+	const handleDelete = (id) => {
+		if (!confirm('정말 삭제?')) return
+		fetch(`/posts/${id}`, { method: 'delete' })
+			.then(res => res.text())
+			.then(text => {
+				if (text === 'success') {
+					location.href = '/posts'
+				} else {
+					alert(text)
+				}
+			})
+	}
+</script>
+
+</html>

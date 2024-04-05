@@ -1,0 +1,19 @@
+<html>
+<div>
+	<h3>채팅 리스트</h3>
+	<div>
+		<% if(result.length==0){ %>
+			<div>채팅방이 없습니다</div>
+			<% } %>
+				<% for(chat of result){ %>
+					<div class="chat">
+						<a href="/chat/<%= chat._id %>">
+							<p>채팅방 : <%= chat._id %>
+							</p>
+						</a>
+					</div>
+					<% } %>
+	</div>
+</div>
+
+</html>
