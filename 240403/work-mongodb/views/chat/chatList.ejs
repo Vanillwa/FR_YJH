@@ -11,6 +11,13 @@
 							<p>채팅방 : <%= chat._id %>
 							</p>
 						</a>
+						<p>참가자 : <span>
+								<% for(member of chat.member){ %>
+									<span>
+										<%= member.username %> / 
+									</span>
+									<% } %>
+							</span></p>
 					</div>
 					<% } %>
 	</div>

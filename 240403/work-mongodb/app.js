@@ -18,7 +18,7 @@ const { Server } = require('socket.io')
 const server = createServer(app)
 const io = new Server(server)
 
-const sessionConfig = {
+const sessionConfig = session({
 	secret: '1111',
 	resave: false,
 	saveUninitialized: false,
@@ -27,15 +27,16 @@ const sessionConfig = {
 		mongoUrl: url,
 		dbName: 'forum'
 	})
-}
+})
 
-let db, users, posts, comments, chatroom
+let db, users, posts, comments, chatroom, chatlog
 new MongoClient(url).connect().then((client) => {
 	db = client.db('forum')
 	users = db.collection('users')
 	posts = db.collection('posts')
 	comments = db.collection('comments')
 	chatroom = db.collection('chatroom')
+	chatlog = db.collection('chatlog')
 }).catch((err) => {
 	console.log(err)
 })
@@ -46,7 +47,7 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(passport.initialize());
-app.use(session(sessionConfig))
+app.use(sessionConfig)
 app.use(passport.session());
 
 passport.use(new localStrategy(async (username, password, cb) => {
@@ -216,18 +217,26 @@ app.post('/comment', async (req, res) => {
 //-------------------------------------------
 
 app.get('/chat/list', async (req, res) => {
-	let result = await chatroom.find({ member: req.user.id }).toArray()
+	let result = await chatroom.find({ member: req.user }).toArray()
 	return res.render('chat/chatList', { result, user: req.user })
 })
 
 app.get('/chat/request', async (req, res) => {
-	let check = await chatroom.findOne({member : {$all : [req.user.id, req.query.targetId] } });
-	console.log("check : "+check)
-	if(check != null){
+	let {targetId} = req.query
+	if(!req.user) return res.redirect('/login')
+	if(req.user.id == targetId) return res.redirect('/')
+
+	let targetUser = await users.findOne({_id : new ObjectId(targetId)})
+	let newUser = {
+		id : targetUser._id.toString(),
+		username : targetUser.username
+	}
+	let check = await chatroom.findOne({ member: { $all: [req.user , newUser] } });
+	if (check != null) {
 		return res.redirect(`/chat/${check._id}`)
 	}
 	let result = await chatroom.insertOne({
-		member: [req.user.id, req.query.targetId],
+		member: [req.user , newUser],
 		date: new Date()
 	})
 	console.log(result)
@@ -236,20 +245,50 @@ app.get('/chat/request', async (req, res) => {
 
 app.get('/chat/:id', async (req, res) => {
 	const { id } = req.params
-	let result = await chatroom.findOne({ _id: new ObjectId(id) })
-	return res.render('chat/chat', { user: req.user, result })
+	let roomInfo = await chatroom.findOne({ _id: new ObjectId(id) })
+	let chatlogs = await chatlog.find({roomId : id}).toArray()
+	return res.render('chat/chat', { user: req.user, roomInfo, chatlogs })
 })
 
-io.on('connection', (socket)=>{
+
+// ------------------------------------------------------------------------
+
+function onlyForHandshake(middleware) {
+  return (req, res, next) => {
+    const isHandshake = req._query.sid === undefined;
+    if (isHandshake) {
+      middleware(req, res, next);
+    } else {
+      next();
+    }
+  };
+}
+
+io.engine.use(onlyForHandshake(sessionConfig));
+io.engine.use(onlyForHandshake(passport.session()));
+io.engine.use(
+  onlyForHandshake((req, res, next) => {
+    if (req.user) {
+      next();
+    } else {
+      res.writeHead(401);
+      res.end();
+    }
+  }),
+);
+
+io.on('connection', (socket) => {
 	console.log('socket connected')
-	
-	socket.on('ask-join', async (data)=>{
+
+	socket.on('ask-join', async (data) => {
 		io.emit('message', '채팅방에 입장하셨습니다.')
 		socket.join(data)
 	})
 
-	socket.on('message-send', async (data)=>{
-		console.log(socket.request)
-		io.to(data.room).emit('message-broadcast', data)
+	socket.on('message-send', async (data) => {
+		data.user = socket.request.user
+		console.log(data)
+		await chatlog.insertOne(data)
+		io.to(data.roomId).emit('message-broadcast', data)
 	})
 })
