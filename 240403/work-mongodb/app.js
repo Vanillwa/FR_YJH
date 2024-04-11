@@ -24,7 +24,7 @@ const sessionConfig = session({
 	secret: '1111',
 	resave: false,
 	saveUninitialized: false,
-	cookie: { maxAge: 1000 * 60 * 60 },
+	cookie: {secure: false, maxAge: 1000 * 60 * 60 },
 	store: MongoStore.create({
 		mongoUrl: url,
 		dbName: 'forum'
@@ -44,13 +44,13 @@ new MongoClient(url).connect().then((client) => {
 })
 
 app.set('view engine', 'ejs')
-app.use(cors({ origin: '*' }))
+app.use(cors({ origin: ['http://localhost:8082', 'http://localhost:3000'], credentials: true }))
 app.use(layout)
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(passport.initialize());
 app.use(sessionConfig)
+app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new localStrategy(async (username, password, cb) => {
@@ -77,7 +77,7 @@ server.listen(port, () => {
 })
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/build/index.html"));
+  res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
 // app.get('/login', (req, res) => {
@@ -134,8 +134,9 @@ app.post('/api/join', async (req, res) => {
 
 
 // -----------------------------------------------------------------------------------
-app.get('/api/posts', async (req, res) => {
+app.get('/api/post', async (req, res) => {
 	const { title, content } = req.query
+	console.log(req.user)
 	let result
 	if (title != null) result = await posts.find({ title: { $regex: new RegExp(title) } }).toArray()
 	else if (content != null) result = await posts.find({ content: { $regex: new RegExp(content) } }).toArray()
@@ -148,7 +149,7 @@ app.get('/api/posts', async (req, res) => {
 // 	return res.render('post/write', { user: req.user })
 // })
 
-app.get('/api/posts/:id', async (req, res) => {
+app.get('/api/post/:id', async (req, res) => {
 	const { id } = req.params
 	try {
 		let result = await posts.findOne({ _id: new ObjectId(id) })
@@ -161,7 +162,7 @@ app.get('/api/posts/:id', async (req, res) => {
 	}
 })
 
-app.post('/api/posts', async (req, res) => {
+app.post('/api/post', async (req, res) => {
 	if (!req.user) return res.send('NoAuth')
 	let body = {
 		title: req.body.title,
@@ -223,39 +224,40 @@ app.post('/api/posts', async (req, res) => {
 
 //-------------------------------------------
 
-// app.get('/chat/list', async (req, res) => {
-// 	let result = await chatroom.find({ member: req.user }).toArray()
-// 	return res.render('chat/chatList', { result, user: req.user })
-// })
+app.get('/api/chat/list', async (req, res) => {
+	console.log(req.user)
+	let result = await chatroom.find({ member: req.user }).toArray()
+	return res.send(result)
+})
 
-// app.get('/chat/request', async (req, res) => {
-// 	let { targetId } = req.query
-// 	if (!req.user) return res.redirect('/login')
-// 	if (req.user.id == targetId) return res.redirect('/')
+app.get('/api/chat/request', async (req, res) => {
+	let { targetId } = req.query
+	console.log(targetId)
+	if (!req.user) return res.send({message : 'NoAuth'})
+	if (req.user.id == targetId) return res.send({message : 'SameId'})
 
-// 	let targetUser = await users.findOne({ _id: new ObjectId(targetId) })
-// 	let newUser = {
-// 		id: targetUser._id.toString(),
-// 		username: targetUser.username
-// 	}
-// 	let check = await chatroom.findOne({ member: { $all: [req.user, newUser] } });
-// 	if (check != null) {
-// 		return res.redirect(`/chat/${check._id}`)
-// 	}
-// 	let result = await chatroom.insertOne({
-// 		member: [req.user, newUser],
-// 		date: new Date()
-// 	})
-// 	console.log(result)
-// 	return res.redirect(`/chat/${result.insertedId}`)
-// })
+	let targetUser = await users.findOne({ _id: new ObjectId(targetId) })
+	let newUser = {
+		id: targetUser._id.toString(),
+		username: targetUser.username
+	}
+	let check = await chatroom.findOne({ member: { $all: [req.user, newUser] } });
+	if (check != null) {
+		return res.send({message : 'Exist', roomId : check._id})
+	}
+	let result = await chatroom.insertOne({
+		member: [req.user, newUser],
+		date: new Date()
+	})
+	return res.send({message : 'success', roomId : result.insertedId})
+})
 
-// app.get('/chat/:id', async (req, res) => {
-// 	const { id } = req.params
-// 	let roomInfo = await chatroom.findOne({ _id: new ObjectId(id) })
-// 	let chatlogs = await chatlog.find({ roomId: id }).toArray()
-// 	return res.render('chat/chat', { user: req.user, roomInfo, chatlogs })
-// })
+app.get('/api/chat/list/:id', async (req, res) => {
+	const { id } = req.params
+	let roomInfo = await chatroom.findOne({ _id: new ObjectId(id) })
+	let chatlogs = await chatlog.find({ roomId: id }).toArray()
+	return res.send({ roomInfo, chatlogs })
+})
 
 
 // ------------------------------------------------------------------------
@@ -288,15 +290,14 @@ io.on('connection', (socket) => {
 	console.log('socket connected')
 
 	socket.on('ask-join', async (data) => {
-		io.emit('message', '채팅방에 입장하셨습니다.')
 		socket.join(data)
 	})
 
-	socket.on('message-send', async (data) => {
+	socket.on('send-message', async (data) => {
 		data.user = socket.request.user
 		console.log(data)
 		await chatlog.insertOne(data)
-		io.to(data.roomId).emit('message-broadcast', data)
+		io.to(data.roomId).emit('send-message', data)
 	})
 })
 

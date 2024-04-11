@@ -6,7 +6,7 @@
 	<p>
 		내용 : <%= result.content %>
 	</p>
-	<p>작성자 : <%= result.username %> | <a href="/chat/request?targetId=<%= result.userId %>">채팅하기</a></p>
+	<p>작성자 : <%= result.userInfo.username %> | <a href="/chat/request?targetId=<%= result.userId %>">채팅하기</a></p>
 </div>
 <div class="commentList">
 	<h3>댓글</h3>
